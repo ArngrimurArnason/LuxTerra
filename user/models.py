@@ -1,7 +1,7 @@
 from django.db import models
 
 class User(models.Model):
-    userid = models.AutoField(primary_key=True)
+    user_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     profile_img = models.CharField(max_length=4096)
     email = models.CharField(max_length=100)

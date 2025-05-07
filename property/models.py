@@ -2,8 +2,8 @@ from django.db import models
 from user.models import User
 
 class Property(models.Model):
-    propertyid = models.AutoField(primary_key=True)
-    userid = models.ForeignKey('user.User', on_delete=models.CASCADE)
+    property_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
     admin_approval = models.BooleanField(default=False)
     street = models.CharField(max_length=100)
     house_number = models.IntegerField()
@@ -20,4 +20,4 @@ class Property(models.Model):
 
 class PropertyImages(models.Model):
     images = models.CharField(max_length=4096)
-    propertyid = models.ForeignKey(Property, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
