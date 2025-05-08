@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+def properties(request):
+    pass
+def list_property(request):
+    pass
+
+def property_details(request, property_id):
+    pass
