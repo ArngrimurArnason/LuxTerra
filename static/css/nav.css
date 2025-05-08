@@ -1,9 +1,15 @@
 .navbar.bg-body-tertiary {
-    background-color: #41563B !important;
+    background-color: #41563b !important;
+
+}
+
+.bi-person-circle {
+    fill: #E8E6B7;
+    transition: fill 0.3s ease;
 }
 
 .navbar .nav-link {
-    color: #E8E6B7 !important;
+    color: #e8e6b7 !important;
     font-family: "Times New Roman", Times !important;
 }
 
