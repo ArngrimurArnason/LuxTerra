@@ -1,83 +1,80 @@
-
 {% extends 'base.html' %}
 {% block content %}
     <h2 id="h2">Find a place where dreams come home<br>-LuxTerra</h2>
     <div class="filter-container">
-    <div class="filters">
-    <label>
-        Postal code
-        <select name="postal_code" class="custom-select">
-            <option value="">Any</option>
-            <option value="101">101</option>
-            <option value="105">105</option>
-            <option value="220">220</option>
-            <option value="221">221</option>
-            <option value="800">800</option>
-            <option value="200">200</option>
+        <div class="filters">
+            <label>
+                Postal code
+                <select name="postal_code" class="custom-select">
+                    <option value="">Any</option>
+                    <option value="101">101</option>
+                    <option value="105">105</option>
+                    <option value="220">220</option>
+                    <option value="221">221</option>
+                    <option value="800">800</option>
+                    <option value="200">200</option>
+                    <!-- Add more -->
+                </select>
+            </label>
 
-            <!-- Add more -->
-        </select>
-    </label>
+            <label>
+                Price
+                <select name="price" class="custom-select">
+                    <option value="">Any</option>
+                    <option value="low">Low to High</option>
+                    <option value="high">High to Low</option>
+                </select>
+            </label>
 
-    <label>
-        Price
-        <select name="price" class="custom-select">
-            <option value="">Any</option>
-            <option value="low">Low to High</option>
-            <option value="high">High to Low</option>
-        </select>
-    </label>
+            <label>
+                Property type
+                <select name="property_type" class="custom-select">
+                    <option value="">Any</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="house">House</option>
+                    <option value="bungalow">Bungalow</option>
+                    <option value="villa">Villa</option>
+                    <option value="penthouse">Penthouse</option>
+                </select>
+            </label>
 
-    <label>
-        Property type
-        <select name="property_type" class="custom-select">
-            <option value="">Any</option>
-            <option value="apartment">Apartment</option>
-            <option value="house">House</option>
-            <option value="bungalow">Bungalow</option>
-            <option value="villa">Villa</option>
-            <option value="penthouse">Penthouse</option>
+            <label>
+                Street name
+                <input type="text" name="street_name" class="custom-input" placeholder="">
+            </label>
 
-        </select>
-    </label>
-
-    <label>
-        Street name
-        <input type="text" name="street_name" class="custom-input" placeholder="">
-    </label>
-
-    <button class="search-button">🔍</button>
-    </div>
+            <button class="search-button">🔍</button>
+        </div>
     </div>
 
     <div class="property-container">
-    {% for p in properties %}
-        <a href="{% url 'property_details' p.property_id %}" class="card-link">
+        {% for p in properties %}
         <div class="card prop">
-            <!-- Image section -->
-            <div class="property-image card-img-top"
-                 style="background-image: url('{{ p.thumbnail }}');">
-                <!-- Address as overlay on image -->
-                <h3 class="property-address">{{ p.street }} {{ p.house_number }}</h3>
-            </div>
-
-            <!-- Card body with property details -->
-            <div class="card-body">
-                <div class="property-details">
-                    <div class="room-detail">
-                        <i class="fa fa-door-open"></i> <!-- Assuming Font Awesome or similar icon library -->
-                        <span class="room-count">{{ p.bathroom|add:p.bedrooms }}</span>
-                    </div>
-                    <div class="size-detail">
-                        <i class="fa fa-expand"></i> <!-- Assuming Font Awesome or similar icon library -->
-                        <span class="size-value">{{ p.size }} m²</span>
-                    </div>
+            <!-- Image section with clickable link -->
+            <a href="{% url 'property_details' p.property_id %}" class="card-link">
+                <div class="property-image card-img-top"
+                    style="background-image: url('{{ p.thumbnail }}');">
+                    <h3 class="property-address">{{ p.street }} {{ p.house_number }}</h3>
                 </div>
 
-                <!-- Price as card footer -->
-                <div class="property-price">{{ p.price }} kr</div>
-            </div>
+                <!-- Card body with property details -->
+                <div class="card-body">
+                    <div class="property-details">
+                        <div class="room-detail">
+                            <i class="fa fa-door-open"></i>
+                            <span class="room-count">{{ p.bathroom|add:p.bedrooms }}</span>
+                        </div>
+                        <div class="size-detail">
+                            <i class="fa fa-expand"></i>
+                            <span class="size-value">{{ p.size }} m²</span>
+                        </div>
+                    </div>
+
+                    <!-- Price as card footer -->
+                    <div class="property-price">{{ p.price }} kr</div>
+                </div>
+            </a> <!-- End of clickable link -->
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 {% endblock %}
