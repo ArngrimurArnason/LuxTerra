@@ -20,8 +20,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('user.urls')),
-    path('admin/', admin.site.urls),
-    path('', include('LuxTerra.site_urls')),  # Including homepage app URLs
-    path('user/', include('user.urls')),     # Routes for the user app
-    path('property/', include('property.urls')),  # Routes for the property app
+    #path('admin/', admin.site.urls),
+    #path('', include('LuxTerra.site_urls')),  # Including homepage app URLs
+    #path('user/', include('user.urls')),     # Routes for the user app
+    #path('property/', include('property.urls')),  # Routes for the property app
 ]
