@@ -1,0 +1,167 @@
+#h2 {
+    color: #41563B;
+    justify-content: center;
+    text-align: center;
+}
+.filter-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.filters {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    color: #2c2c2c;
+}
+
+.custom-select,
+.custom-input {
+    border: 2px solid #2d3b23;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    font-family: 'Playfair Display', serif;
+    min-width: 140px;
+}
+
+.search-button {
+    background-color: #2d3b23;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.property-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Responsive handling for smaller screens */
+@media (max-width: 992px) {
+    .property-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .property-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card styling */
+.prop {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Property image */
+.property-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-color: #f8f8f8; /* Placeholder background if image fails to load */
+}
+
+/* Address overlay - smaller font as requested */
+.property-address {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(184, 177, 133, 0.85);
+    color: white;
+    margin: 0;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem; /* Smaller text */
+    font-weight: normal;
+    z-index: 2;
+}
+
+/* Property details section - centered */
+.property-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    text-align: center;
+}
+
+/* Room count styling */
+.room-count {
+    font-size: 1.6rem; /* Smaller than original */
+    font-weight: 500;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+/* Room icon */
+.room-count::before {
+    content: "🚪";
+    font-size: 1rem;
+    position: absolute;
+    left: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Size styling with box-arrow icon */
+.property-size {
+    font-size: 1.2rem; /* Smaller than original */
+    font-weight: 400;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+/* Size icon - Box with arrow */
+.property-size::before {
+    content: "";
+    position: absolute;
+    left: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'%3E%3C/path%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'%3E%3C/polyline%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Price styling */
+.property-price {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    margin-top: auto;
+    color:#41563B;
+}
+
+.card-link {
+    display: block; /* Ensures that the link takes up the full width of the card */
+    text-decoration: none; /* Removes the underline from the link */
+    color: inherit; /* Inherit the color of the card, or set a custom color if needed */
+}

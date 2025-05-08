@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'navigationba.html')
+    return render(request, '_navigationba.html')
 
 def about(request):
     return render(request, 'about_us.html')

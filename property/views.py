@@ -3,6 +3,7 @@ properties = [
     "property_id": 1,
     "user": 1,
     "admin_approval": True,
+    "thumbnail": "/static/images/LuxTerralogo_cropped.png",
     "street": "Maple Street",
     "house_number": 123,
     "city": "Reykjavik",
@@ -20,6 +21,7 @@ properties = [
     "property_id": 2,
     "user": 2,
     "admin_approval": False,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Ocean View Drive",
     "house_number": 45,
     "city": "Akureyri",
@@ -37,6 +39,7 @@ properties = [
     "property_id": 3,
     "user": 3,
     "admin_approval": True,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Elm Street",
     "house_number": 88,
     "city": "Hafnarfjordur",
@@ -54,6 +57,7 @@ properties = [
     "property_id": 4,
     "user": 1,
     "admin_approval": True,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Lakeview Road",
     "house_number": 77,
     "city": "Selfoss",
@@ -71,6 +75,7 @@ properties = [
     "property_id": 5,
     "user": 4,
     "admin_approval": False,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Sunrise Blvd",
     "house_number": 5,
     "city": "Kopavogur",
@@ -88,6 +93,7 @@ properties = [
     "property_id": 6,
     "user": 5,
     "admin_approval": True,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Birkihlíð",
     "house_number": 34,
     "city": "Mosfellsbaer",
@@ -105,6 +111,7 @@ properties = [
     "property_id": 7,
     "user": 6,
     "admin_approval": False,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Hilltop Lane",
     "house_number": 19,
     "city": "Reykjanesbaer",
@@ -122,6 +129,7 @@ properties = [
     "property_id": 8,
     "user": 7,
     "admin_approval": True,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Vikingar Street",
     "house_number": 101,
     "city": "Egilsstadir",
@@ -140,6 +148,7 @@ properties = [
     "user": 8,
     "admin_approval": True,
     "street": "Greenfield",
+    "thumbnail": "/static/images/house1.jpg",
     "house_number": 12,
     "city": "Garðabær",
     "post_code": 210,
@@ -156,6 +165,7 @@ properties = [
     "property_id": 10,
     "user": 9,
     "admin_approval": True,
+    "thumbnail": "/static/images/house1.jpg",
     "street": "Lava Road",
     "house_number": 9,
     "city": "Vestmannaeyjar",
@@ -191,10 +201,7 @@ property_images = [
 
 from django.shortcuts import render
 from .models import Property, PropertyImages
-def properties(request):
-    properties = Property.objects.all()
-    property_images = PropertyImages.objects.all()
-
+def properties_view(request):
     return render(request, 'all_properties.html', {
         "properties": properties,
         "property_images": property_images
@@ -202,5 +209,9 @@ def properties(request):
 def list_property(request):
     return render(request, 'list_property.html')
 def property_details(request, property_id):
-    return render(request, 'property_details.html')
+    property = [x for x in properties if x['property_id'] == property_id][0]
+
+    return render(request, 'property_details.html', {
+        "property": property,
+    })
 
