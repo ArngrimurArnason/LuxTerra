@@ -4,4 +4,19 @@
 
 .navbar .nav-link {
     color: #E8E6B7 !important;
+    font-family: "Times New Roman", Times !important;
+}
+
+.container-fluid {
+    padding-left: 0;
+}
+
+.ms-auto.d-flex .nav-link {
+  text-decoration: none;
+  position: relative;
+}
+
+/* Create hover underline effect */
+.ms-auto.d-flex .nav-link:hover {
+  text-decoration: underline;
 }
