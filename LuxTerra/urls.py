@@ -17,11 +17,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from LuxTerra import views
 
 urlpatterns = [
-    path('', include('user.urls')),
-    #path('admin/', admin.site.urls),
-    #path('', include('LuxTerra.site_urls')),  # Including homepage app URLs
-    #path('user/', include('user.urls')),     # Routes for the user app
-    #path('property/', include('property.urls')),  # Routes for the property app
+    path('admin/', admin.site.urls),  # Admin URL
+    path('', views.home, name='home'),  # Homepage route (LuxTerra views)
+    path('about/', views.about, name='about'),  # About page (LuxTerra views)
+    path('contact/', views.contact, name='contact'),  # Contact page (LuxTerra views)
+
+    path('user/', include('user.urls')),  # User app URLs
+    path('properties/', include('property.urls')),  # Property app URLs
 ]

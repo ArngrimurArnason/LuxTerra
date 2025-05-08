@@ -10,13 +10,13 @@
 <body>
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-    <a class="nav-link fs-1" href="#">
-      <img src="{% static 'images/LT_logo_colored.png' %}" alt="Logo" width="160" height="80">
+    <a class="nav-link fs-1" href="{% url 'home' %}">
+      <img src="{% static 'images/LuxTerralogo_cropped.png' %}" alt="Logo" width="80" height="80">
       Lux Terra
     </a>
       <div class="ms-auto d-flex">
-        <a class="nav-link me-5 fs-4" href="#">Contact Us</a>
-        <a class="nav-link me-5 fs-4" href="#">Log In</a>
+        <a class="nav-link me-5 fs-4" href="{% url 'contact' %}">Contact Us</a>
+        <a class="nav-link me-5 fs-4" href="{% url 'login' %}">Log In</a>
           </div>
   </div>
 </nav>

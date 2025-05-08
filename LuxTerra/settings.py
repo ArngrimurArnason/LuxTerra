@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'LuxTerra.site_urls'
+ROOT_URLCONF = 'LuxTerra.urls'
 
 TEMPLATES = [
     {
