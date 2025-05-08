@@ -3,9 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #41563B;
   color: #E8E6B7;
   padding: 0 40px 0 0;
+  background-color: #41563b;
 }
 
 
@@ -29,11 +29,11 @@
 
 
 .navigation_bar {
-    background-color: #41563B;
+
     color: #E8E6B7;
     display: flex;
     font-size: 2em;
-    gap: 30px
+    gap: 30px;
 }
 
 .navigation_bar a {
@@ -46,11 +46,13 @@
 
 .log_in {
     color: #E8E6B7;
+    font-family: "Times New Roman";
 
 }
 
 .contact_us {
     color: #E8E6B7;
+    font-family: "Times New Roman";
 }
 
 body {
