@@ -1,29 +1,15 @@
+/* REMOVE this rule completely */
+.container.mt-5 {
+    margin-top: 0 !important;
+}
+
+/* KEEP this */
+html, body {
+    height: 100%;
+    margin: 0;  
+}
+
+/* REMOVE flex from body — it's now handled in the wrapper */
 body {
-    vertical-align: center;
-
-}
-
-.btn.btn-primary.w-100 {
-    background-color: #41563b !important;
-    color: #e8e6b7;
-    border: none;
-    outline: none;
-}
-
-.text-center a {
-    color: #41563B;
-    text-decoration: none;
-}
-
-.text-center {
-    color: #41563B;
-}
-
-.text-center a:hover {
-    color: #2d3b23;
-    text-decoration: underline;
-}
-
-.email {
-    border: #2d3b23;
+    background-color: #f9f9f9;
 }
