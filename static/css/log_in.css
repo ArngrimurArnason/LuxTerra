@@ -1,4 +1,28 @@
-.form-outline.mb-4 {
-    font-family: "Times New Roman", times !important;
+body {
+    vertical-align: center;
+}
 
+.btn.btn-primary.w-100 {
+    background-color: #41563b !important;
+    color: #e8e6b7;
+    border: none;
+    outline: none;
+}
+
+.text-center a {
+    color: #41563B;
+    text-decoration: none;
+}
+
+.text-center {
+    color: #41563B;
+}
+
+.text-center a:hover {
+    color: #2d3b23;
+    text-decoration: underline;
+}
+
+.email {
+    border: #2d3b23;
 }
