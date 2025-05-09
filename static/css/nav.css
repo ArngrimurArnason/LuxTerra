@@ -1,5 +1,6 @@
 .navbar.bg-body-tertiary {
-    background-color: #22eb57 !important;
+    background-color: #41563b !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 }
 
 .bi-person-circle {
@@ -7,9 +8,19 @@
     transition: fill 0.3s ease;
 }
 
+.logo_image {
+    display: flex;
+    align-items: center;
+}
+
 .navbar .nav-link {
     color: #e8e6b7 !important;
+    font-family: sans-serif !important;
+}
+
+.logo_text {
     font-family: "Times New Roman", Times !important;
+    color: #e8e6b7 !important;
 }
 
 .container-fluid {
