@@ -1,9 +1,30 @@
+
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <div class="Boxes">
-        <div>Properties</div>
-        <div>List property</div>
-        <div>About Us</div>
-    </div>
+
+    <div class="box-container">
+    <a href="{% url 'properties' %}" class="box-link" aria-label="Go to Properties page">
+        <div class="box">
+            <img src="{% static 'images/properties_image.jpg' %}" alt="Properties">
+            <h2>Properties</h2>
+        </div>
+    </a>
+
+    <a href="{% url 'list_property' %}" class="box-link" aria-label="Go to List Property page">
+        <div class="box">
+            <img src="{% static 'images/List_prop_images.jpg' %}" alt="List Property">
+            <h2>List Property</h2>
+        </div>
+    </a>
+
+    <a href="{% url 'about' %}" class="box-link" aria-label="Go to About Us page">
+        <div class="box">
+            <img src="{% static 'images/AboutUs.jpg' %}" alt="About Us">
+            <h2>About Us</h2>
+        </div>
+    </a>
+</div>
+
 
 {% endblock %}
