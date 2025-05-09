@@ -1,26 +1,27 @@
 .navbar.bg-body-tertiary {
-    background-color: #41563b !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    background-color: #36592b !important;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3) !important;
+    background-image: url('../images/60-lines.png') !important;
+    background-repeat: repeat !important;
 }
 
 .bi-person-circle {
-    fill: #E8E6B7;
+    fill: #e8e6b7;
     transition: fill 0.3s ease;
-}
-
-.logo_image {
-    display: flex;
-    align-items: center;
 }
 
 .navbar .nav-link {
     color: #e8e6b7 !important;
-    font-family: sans-serif !important;
+    font-family: "Bookman Old Style", sans-serif !important;
+    display: flex;
+    align-items: center;
 }
 
 .logo_text {
-    font-family: "Times New Roman", Times !important;
-    color: #e8e6b7 !important;
+    font-family: "Bookman Old Style", sans-serif !important;
+    color: #FFFFFFFF !important;
+    font-size: 55px !important;
+    padding-left: 15px;
 }
 
 .container-fluid {
