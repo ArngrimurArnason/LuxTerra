@@ -7,10 +7,11 @@
 </head>
 
 <h2 id="h2">The best deals start with a click — log in today, and unlock the door to your dream property!<br>-LuxTerra</h2>
-<div class="d-flex justify-content-center align-items-center min-vh-100">
-  <div class="container">
+<div class="d-flex justify-content-center align-items-center">
+  <div class="container py-3">
     <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-4">
+      <div class="col-md-6 col-lg-5">
+          <div class="login-box p-4 rounded shadow bg-white">
         <form>
           <div class="mb-3 row align-items-center">
             <label for="email" class="col-sm-3 col-form-label">Email:</label>
@@ -30,12 +31,14 @@
             <div class="offset-sm-3 col-sm-9 text-end">
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
-        </div>
+          </div>
+            <div class="text-center mt-3">
+          <p>Not a member? <a href="{% url 'signup' %}">Register</a></p>
+            </div>
         </form>
 
-        <div class="text-center mt-3">
-          <p>Not a member? <a href="{% url 'signup' %}">Register</a></p>
-        </div>
+    </div>
+
       </div>
     </div>
   </div>
