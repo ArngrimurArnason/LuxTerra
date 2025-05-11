@@ -16,6 +16,6 @@ def login_view(request):
     return render(request, 'login.html')
 
 def signup_view(request):
-    return render(request, 'singup.html')
+    return render(request, 'signup.html')
 
 

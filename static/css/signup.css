@@ -1,0 +1,53 @@
+body {
+  background-color: #fdfdfc;
+  font-family: 'Georgia', serif;
+}
+
+.header, .footer {
+  background-color: #41563B;
+  color: #fff;
+}
+
+.form-label {
+  color: #41563B;
+  font-weight: 500;
+}
+
+.form-control {
+  border: 1px solid #41563B;
+  border-radius: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #41563B;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #2d3b23;
+}
+
+.title {
+  color: #41563B;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #41563B;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.social-icon {
+  font-size: 1.2rem;
+  margin-right: 15px;
+}
+
+.rounded-img {
+  border: 4px solid #41563B;
+  border-radius: 0.5rem;
+  max-width: 100%;
+}

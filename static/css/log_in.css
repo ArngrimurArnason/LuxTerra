@@ -6,10 +6,49 @@
 /* KEEP this */
 html, body {
     height: 100%;
-    margin: 0;  
+    margin: 0;
 }
 
 /* REMOVE flex from body — it's now handled in the wrapper */
 body {
     background-color: #f9f9f9;
+}
+
+.btn.btn-primary {
+    background-color: #41563B !important;
+    border: none;
+    color: #e8e6b7;
+}
+
+.text-center.mt-3 {
+    color: #41563B !important;
+    text-decoration: none;
+}
+
+.text-center.mt-3 a {
+    color: #41563B !important;
+    text-decoration: none;
+}
+
+.text-center.mt-3 a:hover {
+    color: #2d3b23;
+    text-decoration: underline;
+}
+
+.form-control {
+    border-color: #2d3b23;
+}
+
+.form-control:focus {
+    border-color: #41563B;
+    box-shadow: 0 0 0 0.25rem rgba(65, 86, 59, 0.25); /* Adjust opacity as needed */
+}
+
+label[for="email"],
+label[for="password"] {
+    color: #41563B;         /* Your brand green */
+    font-weight: bold;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    font-family: "Berlin Sans FB Demi";
 }
