@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/properties.css' %}">
+{% endblock %}
+
     <h2 id="h2">Find a place where dreams come home<br>-LuxTerra</h2>
     <div class="filter-container">
         <div class="filters">
@@ -43,38 +49,31 @@
                 <input type="text" name="street_name" class="custom-input" placeholder="">
             </label>
 
-            <button class="search-button">🔍</button>
+            <label>
+                &nbsp;
+                <button class="search-button">🔍</button>
+            </label>
         </div>
     </div>
 
-    <div class="property-container">
-        {% for p in properties %}
-        <div class="card prop">
-            <!-- Image section with clickable link -->
-            <a href="{% url 'property_details' p.property_id %}" class="card-link">
-                <div class="property-image card-img-top"
-                    style="background-image: url('{{ p.thumbnail }}');">
-                    <h3 class="property-address">{{ p.street }} {{ p.house_number }}</h3>
+   <div class="property-container">
+    {% for p in properties %}
+    <div class="card prop">
+        <a href="{% url 'property_details' p.property_id %}" class="card-link">
+            <div class="property-image" style="background-image: url('{{ p.thumbnail }}');">
+                <div class="property-address">{{ p.street }} {{ p.house_number }}</div>
+            </div>
+            <div class="card-body">
+                <div class="property-details">
+                    <div class="size-detail">{{ p.size }} m²</div>
+                    <div class="room-detail">{{ p.bedrooms }}</div>
+                    <div class="bathroom-detail">{{ p.bathroom }}</div>
                 </div>
-
-                <!-- Card body with property details -->
-                <div class="card-body">
-                    <div class="property-details">
-                        <div class="room-detail">
-                            <i class="fa fa-door-open"></i>
-                            <span class="room-count">{{ p.bathroom|add:p.bedrooms }}</span>
-                        </div>
-                        <div class="size-detail">
-                            <i class="fa fa-expand"></i>
-                            <span class="size-value">{{ p.size }} m²</span>
-                        </div>
-                    </div>
-
-                    <!-- Price as card footer -->
-                    <div class="property-price">{{ p.price }} kr</div>
-                </div>
-            </a> <!-- End of clickable link -->
-        </div>
-        {% endfor %}
+                <div class="property-price">{{ p.price }} kr</div>
+            </div>
+        </a>
     </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

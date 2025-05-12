@@ -200,12 +200,16 @@ property_images = [
 
 
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from .models import Property, PropertyImages
 def properties_view(request):
     return render(request, 'all_properties.html', {
         "properties": properties,
         "property_images": property_images
     })
+
+
+@login_required(login_url='login')
 def list_property(request):
     return render(request, 'list_property.html')
 def property_details(request, property_id):

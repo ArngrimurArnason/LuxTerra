@@ -3,6 +3,10 @@
 {% load static %}
 {% block content %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
     <div class="box-container">
     <a href="{% url 'properties' %}" class="box-link" aria-label="Go to Properties page">
         <div class="box">
@@ -13,14 +17,14 @@
 
     <a href="{% url 'list_property' %}" class="box-link" aria-label="Go to List Property page">
         <div class="box">
-            <img src="{% static 'images/List_prop_images.jpg' %}" alt="List Property">
+            <img src="{% static 'images/List_prop.jpg' %}" alt="List Property">
             <h2>List Property</h2>
         </div>
     </a>
 
     <a href="{% url 'about' %}" class="box-link" aria-label="Go to About Us page">
         <div class="box">
-            <img src="{% static 'images/AboutUs.jpg' %}" alt="About Us">
+            <img src="{% static 'images/lite.avif' %}" alt="About Us">
             <h2>About Us</h2>
         </div>
     </a>
