@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'property.apps.PropertyConfig',
     'user.apps.UserConfig',
     'offer.apps.OfferConfig',
-    'custom_admin.apps.AdminConfig',
 ]
+
+AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
