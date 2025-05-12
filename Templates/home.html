@@ -3,6 +3,10 @@
 {% load static %}
 {% block content %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
     <div class="box-container">
     <a href="{% url 'properties' %}" class="box-link" aria-label="Go to Properties page">
         <div class="box">

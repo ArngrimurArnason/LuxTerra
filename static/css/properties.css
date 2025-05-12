@@ -1,0 +1,201 @@
+#h2 {
+    text-align: center;
+    margin: 3rem auto;
+    color: #41563B;
+    font-family: "Times New Roman", serif;
+}
+
+/* Filter Container */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+/* Filters Styling */
+.filters {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Individual Filter Label */
+.filters label {
+    font-family: "Times New Roman", serif;
+    font-size: 1rem;
+    color: #41563B;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* Custom Select and Input Styles */
+.custom-select,
+.custom-input {
+    border-radius: 20px; /* Rounded edges */
+    border: 2px solid #41563B; /* Green border */
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    font-size: 1rem;
+    outline: none;
+    width: 180px;
+    background-color: #fff;
+    color: #41563B;
+    appearance: none; /* removes default dropdown style */
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%2341563B" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 10px;
+}
+
+/* Input without dropdown arrow */
+.custom-input {
+    background-image: none;
+}
+
+/* Search Button Style */
+.search-button {
+    height: 40px;
+    width: 40px;
+    background-color: #41563B;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Placeholder color adjustment */
+::placeholder {
+    color: #41563B;
+    opacity: 0.7;
+}
+
+
+/* Property Container */
+.property-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+/* Responsive layout */
+@media (max-width: 992px) {
+    .property-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .property-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card Design */
+.card.prop {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.card.prop:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Property Image with Overlay Label */
+.property-image {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.property-address {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255,0,0,0.8);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Card body details */
+.card-body {
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+/* Property details with clear layout */
+.property-details {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 1rem;
+}
+
+.room-detail,
+.size-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.room-detail::before {
+    content: "🛏️";
+    font-size: 1.1rem;
+}
+
+.size-detail::before {
+    content: "📐";
+    font-size: 1.1rem;
+}
+
+/* Property Price Emphasis */
+.property-price {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding-top: 0.7rem;
+    color: #2c2c2c;
+}
+
+/* Add bathroom icon explicitly */
+.bathroom-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.bathroom-detail::before {
+    content: "🛁";
+    font-size: 1.1rem;
+}
