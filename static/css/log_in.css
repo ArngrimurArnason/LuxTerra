@@ -1,37 +1,40 @@
-/* REMOVE this rule completely */
-.container.mt-5 {
-    margin-top: 0 !important;
-}
 
-/* KEEP this */
+
 html, body {
     height: 100%;
     margin: 0;
 }
 
-/* REMOVE flex from body — it's now handled in the wrapper */
 body {
     background-color: #f9f9f9;
 }
 
 .btn.btn-primary {
-    background-color: #41563B !important;
-    border: none;
-    color: #e8e6b7;
+  background-color: #e8e6b7 !important;
+  border: none !important;
+  color: #41563B !important;
+  border-radius: 0.4rem;
+  padding: 0.4rem 1.2rem;
 }
 
+.btn.btn-primary:hover {
+  background-color: #b5b26c !important;
+}
+
+
 .text-center.mt-3 {
-    color: #41563B !important;
+    color: #e8e6b7 !important;
+    font-family: "Bookman Old Style", sans-serif !important;
     text-decoration: none;
 }
 
 .text-center.mt-3 a {
-    color: #41563B !important;
+    color: #e8e6b7 !important;
     text-decoration: none;
 }
 
 .text-center.mt-3 a:hover {
-    color: #2d3b23;
+    color: #e8e6b7;
     text-decoration: underline;
 }
 
@@ -40,15 +43,33 @@ body {
 }
 
 .form-control:focus {
-    border-color: #41563B;
+    border-color: #e8e6b7;
     box-shadow: 0 0 0 0.25rem rgba(65, 86, 59, 0.25); /* Adjust opacity as needed */
 }
 
-label[for="email"],
-label[for="password"] {
-    color: #41563B;         /* Your brand green */
-    font-weight: bold;
+.login-box {
+    background-color: #41563B !important;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.login-box .form-control::placeholder {
+  color: #ccc;
+  opacity: 0.7;
+}
+
+.login-box .form-control {
+    color: #000000;
+    font-family:  "Bookman Old Style", sans-serif !important;;
+}
+#h2 {
+    color: #41563B;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.col-form-label {
+    color: #e8e6b7;
     font-size: 1.5rem;
-    letter-spacing: 0.5px;
-    font-family: "Berlin Sans FB Demi";
+    font-family: "Bookman Old Style", sans-serif !important;;
 }
