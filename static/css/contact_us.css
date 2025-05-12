@@ -1,0 +1,88 @@
+/* Base layout */
+body {
+  font-family: "Bookman Old Style", sans-serif !important;
+  background-color: #ffffff;
+  color: #2d3b23;
+}
+
+/* Title styling */
+.contact-title {
+  font-family: "Bookman Old Style", sans-serif !important;
+  color: #2d3b23;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* Contact row */
+.row .bi {
+  font-size: 2rem;
+  color: #41563B;
+}
+
+/* Align icon and text nicely */
+.row .d-flex span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #41563B;
+}
+
+/* Emergency names */
+.emergency-name {
+  font-family: "Bookman Old Style", sans-serif !important;
+  font-weight: bold;
+  color: #41563B;
+}
+
+/* Emergency section images */
+.img-fluid {
+  max-height: 300px;
+  object-fit: cover;
+  border: 4px solid #41563B;
+  border-radius: 0.5rem;
+}
+
+/* Section headings */
+h4 {
+  font-family: "Bookman Old Style", sans-serif !important;
+  color: #2d3b23;
+  font-size: 1.75rem;
+}
+
+/* LuxTerra text */
+.luxterra-title {
+  color: #41563B;
+  font-family: "Bookman Old Style", sans-serif !important;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.luxterra-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-family: 'Georgia', serif;
+  color: #2d3b23;
+  max-width: 90%;
+}
+
+
+@media (max-width: 768px) {
+  .contact-title {
+    font-size: 2rem;
+  }
+
+  .row .d-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .luxterra-desc {
+    max-width: 100%;
+  }
+
+  iframe {
+    margin-top: 1.5rem;
+  }
+}
+
