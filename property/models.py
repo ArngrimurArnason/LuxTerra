@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import User
+
 
 class Property(models.Model):
     property_id = models.AutoField(primary_key=True)
@@ -17,7 +17,8 @@ class Property(models.Model):
     bedrooms = models.IntegerField()
     size = models.IntegerField()
     property_status = models.BooleanField()
+    thumbnail = models.ImageField(upload_to='property_thumbnails/', blank=True, null=True)
 
 class PropertyImages(models.Model):
-    images = models.CharField(max_length=4096)
-    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='property_images/')

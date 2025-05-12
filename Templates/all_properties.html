@@ -61,9 +61,13 @@
     <div class="card prop">
         <a href="{% url 'property_details' p.property_id %}" class="card-link">
             <div class="property-image" style="background-image: url('{{ p.thumbnail }}');">
-                <div class="property-address">{{ p.street }} {{ p.house_number }}</div>
+                <div class="property-address">
+                    Íbúðareign: {{ p.post_code }} {{ p.city }}
+                </div>
             </div>
             <div class="card-body">
+                <h3 class="property-street">{{ p.street }} {{ p.house_number }}</h3>
+
                 <div class="property-details">
                     <div class="size-detail">{{ p.size }} m²</div>
                     <div class="room-detail">{{ p.bedrooms }}</div>

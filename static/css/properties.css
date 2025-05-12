@@ -137,7 +137,7 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: rgba(255,0,0,0.8);
+    background-color: #41563B;
     color: white;
     padding: 0.3rem 0.7rem;
     border-radius: 4px;
@@ -171,12 +171,12 @@
 
 .room-detail::before {
     content: "🛏️";
-    font-size: 1.1rem;
+    font-size: 1.4rem;
 }
 
 .size-detail::before {
     content: "📐";
-    font-size: 1.1rem;
+    font-size: 1.4rem;
 }
 
 /* Property Price Emphasis */
@@ -197,5 +197,5 @@
 
 .bathroom-detail::before {
     content: "🛁";
-    font-size: 1.1rem;
+    font-size: 1.4rem;
 }
