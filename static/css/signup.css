@@ -1,53 +1,55 @@
-body {
-  background-color: #fdfdfc;
-  font-family: 'Georgia', serif;
-}
-
-.header, .footer {
+.signup-box {
   background-color: #41563B;
-  color: #fff;
-}
-
-.form-label {
-  color: #41563B;
-  font-weight: 500;
-}
-
-.form-control {
-  border: 1px solid #41563B;
-  border-radius: 0.5rem;
-}
-
-.btn-primary {
-  background-color: #41563B;
-  border: none;
-  border-radius: 0.5rem;
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background-color: #2d3b23;
-}
-
-.title {
-  color: #41563B;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.subtitle {
-  color: #41563B;
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.social-icon {
-  font-size: 1.2rem;
-  margin-right: 15px;
-}
-
-.rounded-img {
-  border: 4px solid #41563B;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   max-width: 100%;
+  color: #e8e6b7;
+}
+
+.signup-box .form-control {
+  color: #000;
+  border-color: #2d3b23;
+  font-family: "Bookman Old Style", sans-serif !important;
+}
+
+.signup-box .form-control:focus {
+  border-color: #e8e6b7;
+  box-shadow: 0 0 0 0.25rem rgba(65, 86, 59, 0.25);
+}
+
+.signup-box .form-label {
+  color: #e8e6b7;
+  font-family: "Bookman Old Style", sans-serif !important;
+  font-size: 1.5rem;
+}
+
+.signup-box .btn-primary {
+  background-color: #e8e6b7 !important;
+  color: #41563B !important;
+  float: right;
+  padding: 0.4rem 1.5rem;
+  border: none;
+  border-radius: 0.4rem;
+}
+
+.signup-box .btn-primary:hover {
+  background-color: #b5b26c !important;
+}
+
+.signup-box .text-center {
+  color: #e8e6b7;
+  font-family: "Bookman Old Style", sans-serif !important;
+}
+
+.signup-box .text-center a {
+  color: #e8e6b7;
+  text-decoration: none;
+}
+
+.signup-box .text-center a:hover {
+  text-decoration: underline;
+}
+
+.heading-text {
+  font-weight: bold
 }
