@@ -199,3 +199,41 @@
     content: "🛁";
     font-size: 1.4rem;
 }
+
+.sort-container-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.sort-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+    color: #41563B;
+    font-family: "Times New Roman", serif;
+}
+
+.sort-container label {
+    font-size: 1rem;
+    color: #41563B;
+}
+
+.sort-container select.custom-select {
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #41563B;
+    padding: 0 12px;
+    font-size: 1rem;
+    color: #41563B;
+    background-color: #fff;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%2341563B" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px;
+}
