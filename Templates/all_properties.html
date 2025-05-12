@@ -53,17 +53,35 @@
                 &nbsp;
                 <button class="search-button">🔍</button>
             </label>
+
         </div>
     </div>
-
+    <div class="sort-container-wrapper">
+        <div class="sort-container">
+            <label for="order_by">Order by</label>
+            <select name="order_by" id="order_by" class="custom-select">
+                <option value="">Default</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+                <option value="size_asc">Size: Small to Large</option>
+                <option value="size_desc">Size: Large to Small</option>
+                <option value="date_desc">Newest First</option>
+                <option value="date_asc">Oldest First</option>
+            </select>
+        </div>
+    </div>
    <div class="property-container">
     {% for p in properties %}
     <div class="card prop">
         <a href="{% url 'property_details' p.property_id %}" class="card-link">
             <div class="property-image" style="background-image: url('{{ p.thumbnail }}');">
-                <div class="property-address">{{ p.street }} {{ p.house_number }}</div>
+                <div class="property-address">
+                    Íbúðareign: {{ p.post_code }} {{ p.city }}
+                </div>
             </div>
             <div class="card-body">
+                <h3 class="property-street">{{ p.street }} {{ p.house_number }}</h3>
+
                 <div class="property-details">
                     <div class="size-detail">{{ p.size }} m²</div>
                     <div class="room-detail">{{ p.bedrooms }}</div>
