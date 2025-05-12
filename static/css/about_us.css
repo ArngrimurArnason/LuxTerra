@@ -1,26 +1,27 @@
 .about-left h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Bookman Old Style", sans-serif !important;
   font-size: 2rem;
   color: #41563B;
   margin-bottom: 1rem;
 }
 
 .about-left p {
-  font-family: 'Playfair Display', serif;
+  font-family: "Bookman Old Style", sans-serif !important;
   font-size: 1.5rem;
   color: #41563B;
   line-height: 2rem;
 }
 
 h2, h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Bookman Old Style", sans-serif !important;
   color: #41563B;
 }
 
 .lead {
-  font-family: 'Playfair Display', serif;
+  font-family: "Bookman Old Style", sans-serif !important;
   font-size: 1.4rem;
   color: #41563B;
+  text-align: justify;
 }
 .img-fluid {
   max-height: 300px;
@@ -30,8 +31,17 @@ h2, h3 {
 }
 
 .owner-name {
-  font-family: 'Playfair Display', serif;
+  font-family: "Bookman Old Style", sans-serif !important;
   font-size: 1.2rem;
   color: #41563B;
   margin-top: 0.5rem;
 }
+
+.owner-img {
+  border: 3px solid #41563B;
+  border-radius: 12px;
+  max-height: 350px;
+  object-fit: cover;
+}
+
+
