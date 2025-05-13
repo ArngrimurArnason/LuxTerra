@@ -19,14 +19,17 @@ class ListPropertyForm(ModelForm):
             'house_number': forms.NumberInput(attrs={'class': 'form-control'}),
             'city': forms.TextInput(attrs={'class': 'form-control'}),
             'post_code': forms.NumberInput(attrs={'class': 'form-control'}),
-            'property_type': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'property_type': forms.Select(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
-            'build_date': forms.DateField(widget=SelectDateWidget(years=range(1900, datetime.date.today().year + 1), attrs={'class': 'form-control'})),
+            'build_date': SelectDateWidget(
+                years=range(1900, datetime.date.today().year + 1),
+                attrs={'class': 'form-control'}
+            ),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'bathroom': forms.NumberInput(attrs={'class': 'form-control quantity-input', 'min': 0}),
             'bedrooms': forms.NumberInput(attrs={'class': 'form-control quantity-input', 'min': 0}),
             'size': forms.NumberInput(attrs={'class': 'form-control quantity-input', 'min': 0}),
-            'property_status': forms.CheckboxInput(attrs={'class': 'form-control'}),
+            'property_status': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'thumbnail': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 

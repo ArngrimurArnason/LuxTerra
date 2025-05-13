@@ -3,6 +3,8 @@
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+
+from .forms.list_property_forms import ListPropertyForm
 from .models import Property, PropertyImages
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
@@ -80,11 +82,21 @@ def properties_view(request):
 
 @login_required(login_url='login')
 def list_property(request):
-  if request.method == "POST":
-    pass
-  else:
+    if request.method == "POST":
+        form = ListPropertyForm(request.POST, request.FILES)
+        if form.is_valid():
+            property = form.save(commit=False)
+            property.user = request.user
+            property.save()
+            messages.success(request, 'Property created.')
+            return redirect('home')
+        else:
+            messages.error(request, 'Please fix the errors below.')
+    else:
+        form = ListPropertyForm()
+
     return render(request, 'list_property.html', {
-      'form': None
+        'form': form
     })
 
 def property_details(request, property_id):
