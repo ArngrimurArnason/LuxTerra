@@ -5,7 +5,7 @@ class Property(models.Model):
     property_id = models.AutoField(primary_key=True)
     user = models.ForeignKey('user.User', on_delete=models.CASCADE)
     admin_approval = models.BooleanField(default=False)
-    street = models.CharField(max_length=100)
+    street =    models.CharField(max_length=100)
     house_number = models.IntegerField()
     city = models.CharField(max_length=100)
     post_code = models.IntegerField()
