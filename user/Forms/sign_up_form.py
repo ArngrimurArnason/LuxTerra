@@ -10,7 +10,7 @@ class SignUpForm(ModelForm):
     class Meta:
         model = User
         exclude = ['id']
-        fields = ['username', 'email', 'national_id', 'address', 'logo', 'bio']
+        fields = ['username', 'email', 'national_id', 'address', 'logo', 'profile_img', 'bio']
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
