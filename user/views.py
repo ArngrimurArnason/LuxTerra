@@ -31,7 +31,6 @@ def login_view(request):
         try:
             user_obj = User.objects.get(email=email)
 
-
             # now try to authenticate
             user = authenticate(request, username=user_obj.username, password=password)
 
