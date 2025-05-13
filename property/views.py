@@ -211,7 +211,13 @@ def properties_view(request):
 
 @login_required(login_url='login')
 def list_property(request):
-    return render(request, 'list_property.html')
+  if request.method == "POST":
+    pass
+  else:
+    return render(request, 'list_property.html', {
+      'form': None
+    })
+
 def property_details(request, property_id):
     property = [x for x in properties if x['property_id'] == property_id][0]
 
