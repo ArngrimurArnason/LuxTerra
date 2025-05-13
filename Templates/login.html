@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'Home/base.html' %}
 {% block content %}
 {% load static %}
 <head>
@@ -12,6 +12,11 @@
     <div class="row justify-content-center">
       <div class="col-md-6 col-lg-5">
           <div class="login-box p-4 rounded shadow bg-white">
+              {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                  {% endfor %}
+                {% endif %}
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
           <div class="mb-3 row align-items-center">
@@ -37,11 +42,7 @@
           <p>Not a member? <a href="{% url 'signup' %}">Register</a></p>
             </div>
         </form>
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-warning">{{ message }}</div>
-          {% endfor %}
-        {% endif %}
+
     </div>
 
       </div>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'property.apps.PropertyConfig',
     'user.apps.UserConfig',
     'offer.apps.OfferConfig',
+    'django.contrib.humanize',
 ]
 LOGOUT_REDIRECT_URL = 'home'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

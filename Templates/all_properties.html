@@ -1,12 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'Home/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/properties.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
 {% endblock %}
 
     <h2 id="h2">Find a place where dreams come home<br>-LuxTerra</h2>
+    <form method="get" action="{% url 'properties' %}">
     <div class="filter-container">
         <div class="filters">
             <label>
@@ -24,12 +28,26 @@
             </label>
 
             <label>
-                Price
-                <select name="price" class="custom-select">
-                    <option value="">Any</option>
-                    <option value="low">Low to High</option>
-                    <option value="high">High to Low</option>
+              Price range (kr)
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <select name="min_price" class="custom-select">
+                  <option value="">Min</option>
+                  {% for price in prices %}
+                    <option value="{{ price }}" {% if request.GET.min_price == price|stringformat:"s" %}selected{% endif %}>
+                      {{ price|intcomma }} kr
+                    </option>
+                  {% endfor %}
                 </select>
+                <span>–</span>
+                <select name="max_price" class="custom-select">
+                  <option value="">Max</option>
+                  {% for price in prices %}
+                    <option value="{{ price }}" {% if request.GET.max_price == price|stringformat:"s" %}selected{% endif %}>
+                      {{ price|intcomma }} kr
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
             </label>
 
             <label>
@@ -55,6 +73,7 @@
             </label>
 
         </div>
+
     </div>
     <div class="sort-container-wrapper">
         <div class="sort-container">
@@ -70,6 +89,7 @@
             </select>
         </div>
     </div>
+    </form>
    <div class="property-container">
     {% for p in properties %}
     <div class="card prop">
