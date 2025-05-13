@@ -1,0 +1,33 @@
+body {
+  background-color: #b3b3b3;
+}
+
+.tab-header-container {
+  background-color: #d9d9d9;
+  display: flex;
+}
+
+.tab-header {
+  flex: 1;
+  text-align: center;
+  padding: 1rem;
+  font-family: 'Georgia', serif;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: #d9d9d9;
+  transition: background-color 0.3s;
+}
+
+.tab-header.active-tab {
+  background-color: #b3b3b3;
+}
+
+.form-section {
+  background-color: #b3b3b3;
+  padding: 2rem;
+  margin-top: -1px;
+}
+
+label {
+  font-family: 'Georgia', serif;
+}
