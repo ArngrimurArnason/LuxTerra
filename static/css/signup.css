@@ -5,7 +5,9 @@
   max-width: 100%;
   color: #e8e6b7;
 }
-
+.d-flex.justify-content-center.align-items-center.min-vh-100 {
+    padding-top: 2rem;
+}
 .signup-box .form-control {
   color: #000;
   border-color: #2d3b23;
