@@ -1,6 +1,9 @@
 from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from .models import User
 
 from user.Forms.sign_up_form import SignUpForm
 
@@ -68,3 +71,8 @@ def signup_view(request):
         'form': form})
 
 
+def get_profile_image(request, user_id):
+    profile = get_object_or_404(User, user__id=user_id)
+    return JsonResponse({
+        'profile_image_url': profile.profile_image.url if profile.profile_image else None
+    })

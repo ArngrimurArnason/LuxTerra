@@ -18,6 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from LuxTerra import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin URL
@@ -27,4 +29,4 @@ urlpatterns = [
 
     path('user/', include('user.urls')),  # User app URLs
     path('properties/', include('property.urls')),  # Property app URLs
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
