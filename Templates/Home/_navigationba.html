@@ -26,7 +26,11 @@
               <!-- Profile Dropdown Menu -->
               <div class="dropdown me-3">
                 <a href="#" class="dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="{{ user.profile.image.url }}" alt="Profile" width="50" height="50" class="rounded-circle" onerror="this.onerror=null;this.src='{% static 'images/person-circle.svg' %}'">
+                    {% if user.profile.image %}
+                        <img src="{{ user.profile.image.url }}" alt="Profile" width="50" height="50" class="rounded-cirlce">
+                    {% else %}
+                        <img src="{% static 'images/preson-circle.svg' %}" alt="Profile" width="50" height="50" class="rounded-circle">
+                    {% endif %}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="{% url 'account_info' %}">My Profile</a></li>
