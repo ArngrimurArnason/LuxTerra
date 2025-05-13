@@ -1,2 +1,138 @@
+/* Page background */
+body {
+  background-color: #f5f5f5;
+}
 
+/* Form container */
+form {
+  background-color: #3e5139;
+  color: #e8e6b7;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Section heading */
+form h2 {
+  text-align: center;
+  font-weight: bold;
+  color: #e8e6b7;
+  margin-bottom: 10px;
+}
+
+form h2 + p {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  color: #e8e6b7;
+}
+
+/* Labels */
+.form-label {
+  font-weight: bold;
+  font-size: 1.05rem;
+  color: #e8e6b7;
+}
+
+/* Optional note */
+.form-label small {
+  display: block;
+  font-size: 0.9rem;
+  color: #e8e6b7;
+  font-style: italic;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+input[type="file"] {
+  padding: 6px;
+}
+
+/* Quantity control */
+.quantity-control button {
+  background-color: #e8e6b7;
+  color: #3e5139;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.quantity-control button:hover {
+  background-color: #e3dfb8;
+}
+
+.quantity-control input[type="number"] {
+  max-width: 40px;
+  text-align: center;
+  padding: 6px;
+  font-size: 1rem;
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 1.2rem;
+  border-radius: 6px;
+}
+
+
+/* Submit button */
+button[type="submit"],
+.btn-dark {
+    background-color: #1e2c1b;
+    color: #e8e6b7;
+    border: none;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover,
+.btn-dark:hover {
+  background-color: #2d4226;
+}
+
+/* Alert box for form errors */
+.alert-danger {
+  background-color: #ffdddd;
+  color: #900;
+  border-left: 4px solid #c00;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+form input[type=number]::-webkit-inner-spin-button,
+form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+form input[type=number] {
+  -moz-appearance: textfield;
+}
+.file-input {
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  max-width: 400px;
+}
 
