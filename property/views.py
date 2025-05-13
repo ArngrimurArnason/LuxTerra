@@ -3,10 +3,16 @@
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+
+from .forms.list_property_forms import ListPropertyForm
 from .models import Property, PropertyImages
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
-
+from .models import Property, PropertyImages  # Make sure this import is there
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from .forms import list_property_forms  # and any others if needed
 
 def properties_view(request):
   properties = Property.objects.filter(admin_approval=True)
@@ -78,14 +84,39 @@ def properties_view(request):
   })
 
 
+
+
 @login_required(login_url='login')
 def list_property(request):
-  if request.method == "POST":
-    pass
-  else:
+    if request.method == "POST":
+        form = ListPropertyForm(request.POST, request.FILES)
+        thumbnail_file = request.FILES.get('thumbnail')
+        image_files = request.FILES.getlist('images')
+
+        if form.is_valid():
+            property = form.save(commit=False)
+            property.user = request.user
+
+            if thumbnail_file:
+                property.thumbnail = thumbnail_file  # ✅ assign uploaded thumbnail
+
+            property.save()
+
+            # ✅ Save additional uploaded images
+            for image in image_files:
+                PropertyImages.objects.create(property=property, image=image)
+
+            messages.success(request, 'Property created.')
+            return redirect('home')
+        else:
+            messages.error(request, 'Please fix the errors below.')
+    else:
+        form = ListPropertyForm()
+
     return render(request, 'list_property.html', {
-      'form': None
+        'form': form
     })
+
 
 def property_details(request, property_id):
     property = get_object_or_404(Property, pk=property_id)
