@@ -1,11 +1,14 @@
 from django.db import models
 POST_CODE_CHOICES = [(code, str(code)) for code in [
-    101, 102, 103, 104, 105, 106, 107, 108, 109,
-    110, 111, 112, 113, 116, 161, 162, 170, 200,
-    201, 202, 203, 206, 210, 212, 225, 220, 221,
-    222, 230, 232, 240, 241, 270, 271, 276, 300,
-    400, 401, 550, 600, 601, 602, 700, 735, 736,
-    800, 801, 870, 871, 900, 901
+    '101 - Reykjavík', '102 - Reykjavík', '103 - Reykjavík', '104 - Reykjavík', '105 - Reykjavík', '106 - Reykjavík',
+    '107 - Reykjavík', '108 - Reykjavík', '109 - Reykjavík', '110 - Reykjavík', '111 - Reykjavík', '112 - Reykjavík',
+    '113 - Reykjavík', '116 - Reykjavík', '161 - Reykjavík', '162 - Reykjavík', '170 - Seltjarnarnes', '200 - Kópavogur',
+    '201 - Kópavogur', '202 - Kópavogur', '203 - Kópavogur', '206 - Kópavogur', '210 - Garðabær', '212 - Garðabær',
+    '225 - Garðabær', '220 - Hafnafjörður', '221 - Hafnafjörður', '222 - Hafnafjörður', '230 - Keflavík', '232 - Keflavík',
+    '240 - Grindavík', '241 - Grindavík', '270 - Mosfellsbær', '271 - Mosfellsbær', '276 - Mosfellsbær', '300 - Akranes',
+    '400 - Ísafjörður', '401 - Ísafjörður', '550 - Sauðárkrókur', '600 - Akureyri', '601 - Akureyri', '602 - Akureyri',
+    '700 - Egilsstaðir', '735 - Eskifjörður', '736 - Eskifjörður', '800 - Selfoss', '801 - Selfoss', '870 - Vík',
+    '871 - Vík', '900 - Vestmannaeyjar', '901 - Vestmannaeyjar'
 ]]
 
 PROPERTY_TYPE_CHOICES = [
