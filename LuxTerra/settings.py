@@ -44,8 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 ]
 LOGOUT_REDIRECT_URL = 'home'
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_COOKIE_AGE = 60
 AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
