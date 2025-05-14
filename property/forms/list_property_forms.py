@@ -13,12 +13,11 @@ class ListPropertyForm(ModelForm):
     class Meta:
         model = Property
         exclude = ['property_id']
-        fields = ['street', 'house_number', 'city', 'post_code', 'property_type', 'price', 'description', 'bathroom', 'bedrooms', 'size', 'property_status', 'thumbnail']
+        fields = ['street', 'house_number', 'location', 'property_type', 'price', 'description', 'bathroom', 'bedrooms', 'size', 'property_status', 'thumbnail']
         widgets = {
             'street': forms.TextInput(attrs={'class': 'form-control'}),
             'house_number': forms.NumberInput(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
-            'post_code': forms.Select(attrs={'class': 'form-control'}),
+            'location': forms.Select(attrs={'class': 'form-control'}),
             'property_type': forms.Select(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'build_date': SelectDateWidget(
