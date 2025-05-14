@@ -31,7 +31,7 @@ class SignUpForm(ModelForm):
         nid = self.cleaned_data.get('national_id')
         if not str(nid).isdigit():
             raise ValidationError("SSN must contain only digits.")
-        if len(str(nid)) != 10:
+        if len(nid) != 10:
             raise ValidationError("SSN must be exactly 10 digits.")
         return nid
 
