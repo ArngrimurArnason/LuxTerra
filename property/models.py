@@ -1,5 +1,20 @@
 from django.db import models
+POST_CODE_CHOICES = [(code, str(code)) for code in [
+    101, 102, 103, 104, 105, 106, 107, 108, 109,
+    110, 111, 112, 113, 116, 161, 162, 170, 200,
+    201, 202, 203, 206, 210, 212, 225, 220, 221,
+    222, 230, 232, 240, 241, 270, 271, 276, 300,
+    400, 401, 550, 600, 601, 602, 700, 735, 736,
+    800, 801, 870, 871, 900, 901
+]]
 
+PROPERTY_TYPE_CHOICES = [
+    ('Apartment', 'Apartment'),
+    ('House', 'House'),
+    ('Bungalow', 'Bungalow'),
+    ('Villa', 'Villa'),
+    ('Penthouse', 'Penthouse')
+]
 
 class Property(models.Model):
     property_id = models.AutoField(primary_key=True)
@@ -8,21 +23,8 @@ class Property(models.Model):
     street =    models.CharField(max_length=100)
     house_number = models.IntegerField()
     city = models.CharField(max_length=100)
-    post_code = models.IntegerField(max_length=3, choices=[
-        '101','102','103','104','105','106','107','108','109',
-        '110','111','112','113','116','161','162','170','200',
-        '201','202','203','206','210','212','225','220','221',
-        '222','230','232','240','241','270','271','276','300',
-        '400','401','550','600','601','602','700','735','736',
-        '800','801','870','871','900','901',
-    ])
-    property_type = models.CharField(max_length=50, choices=[
-        'Apartment',
-        'House',
-        'Bungalow',
-        'Villa',
-        'Penthouse'
-    ])
+    post_code = models.IntegerField(choices=POST_CODE_CHOICES)
+    property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES)
     price = models.IntegerField()
     build_date = models.DateField()
     description = models.CharField(max_length=4096)
