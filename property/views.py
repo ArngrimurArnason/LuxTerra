@@ -12,7 +12,18 @@ from .models import Property, PropertyImages  # Make sure this import is there
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from collections import defaultdict
+from .models import LOCATION_CHOICES
 from .forms import list_property_forms  # and any others if needed
+
+
+def group_postal_codes():
+    grouped = defaultdict(list)
+    for full_value, _ in LOCATION_CHOICES:
+        if " - " in full_value:
+            code, city = full_value.split(" - ", 1)
+            grouped[city].append(code)
+    return dict(grouped)
 
 def properties_view(request):
     properties = Property.objects.filter(admin_approval=True)
@@ -58,11 +69,13 @@ def properties_view(request):
     if street_name:
         properties = properties.filter(
             Q(street__icontains=street_name) |
-            Q(location__icontains=street_name)
+            Q(location__icontains=street_name) |
+            Q(street__icontains=street_name.split(' ')[0], house_number__iexact=street_name.split(' ')[-1])
         )
 
     # Related images
     all_images = PropertyImages.objects.all()
+    grouped_postal_codes = group_postal_codes()
 
     # Price filter options
     price_steps = [
@@ -82,6 +95,7 @@ def properties_view(request):
             "street_name": street_name,
         },
         "prices": price_steps,
+        "grouped_postal_codes": grouped_postal_codes,
     })
 
 
