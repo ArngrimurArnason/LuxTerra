@@ -18,7 +18,7 @@ class ListPropertyForm(ModelForm):
             'street': forms.TextInput(attrs={'class': 'form-control'}),
             'house_number': forms.NumberInput(attrs={'class': 'form-control'}),
             'city': forms.TextInput(attrs={'class': 'form-control'}),
-            'post_code': forms.NumberInput(attrs={'class': 'form-control'}),
+            'post_code': forms.Select(attrs={'class': 'form-control'}),
             'property_type': forms.Select(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'build_date': SelectDateWidget(
