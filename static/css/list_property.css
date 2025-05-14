@@ -185,3 +185,58 @@ textarea[name="description"] {
   resize: vertical !important;
   box-sizing: border-box;
 }
+
+/* Smaller and more compact input */
+input,
+textarea,
+select {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}
+
+/* Inline label styling */
+.col-form-label {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+/* Style the grouped date selects to appear like a unified control */
+.date-select {
+  display: inline-block;
+  margin-right: 5px;
+  border: 1px solid #3e5139;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  background-color: white;
+  color: #3e5139;
+  font-family: inherit;
+}
+
+/* Remove spacing between select widgets */
+select.date-select {
+  margin-right: 0;
+}
+
+/* Optional: style all three selects inline */
+select[name$='_day'],
+select[name$='_month'],
+select[name$='_year'] {
+  width: auto;
+  border: none;
+  background: none;
+  box-shadow: none;
+  font-size: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0 8px;
+}
+
+select[name$='_day']:focus,
+select[name$='_month']:focus,
+select[name$='_year']:focus {
+  outline: none;
+}
