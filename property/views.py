@@ -90,32 +90,27 @@ def properties_view(request):
 def list_property(request):
     if request.method == "POST":
         form = ListPropertyForm(request.POST, request.FILES)
-        thumbnail_file = request.FILES.get('thumbnail')
-        image_files = request.FILES.getlist('images')
+        image_files = request.FILES.getlist('images')  # handle multi-images
 
         if form.is_valid():
             property = form.save(commit=False)
             property.user = request.user
+            property.save()  # Save the main property
 
-            if thumbnail_file:
-                property.thumbnail = thumbnail_file  # ✅ assign uploaded thumbnail
-
-            property.save()
-
-            # ✅ Save additional uploaded images
+            # Save each uploaded image to PropertyImages
             for image in image_files:
                 PropertyImages.objects.create(property=property, image=image)
 
-            messages.success(request, 'Property created.')
-            return redirect('home')
+            messages.success(request, 'Listing published to admin.')
+            # Don't redirect — just re-render the same page with an empty form
+            form = ListPropertyForm()
+            return render(request, 'list_property.html', {'form': form})
         else:
-            messages.error(request, 'Please fix the errors below.')
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = ListPropertyForm()
 
-    return render(request, 'list_property.html', {
-        'form': form
-    })
+    return render(request, 'list_property.html', {'form': form})
 
 
 def property_details(request, property_id):

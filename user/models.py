@@ -8,7 +8,7 @@ class User(AbstractUser):
     address = models.CharField(max_length=100, blank=True, null=True)
     logo = models.ImageField(upload_to='logos/', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    national_id = models.IntegerField()
+    national_id = models.CharField(max_length=10)
 
     def __str__(self):
         return self.username

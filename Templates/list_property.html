@@ -97,13 +97,19 @@
               <label class="col-sm-4 col-form-label text-end">Description:</label>
               <div class="col-sm-8">{{ form.description }}</div>
             </div>
+
+              <div class="text-end">
+              <button type="submit" class="btn btn-primary">List property</button>
+            </div>
               </form>
           </div>
         </div>
         </div>
 
 
-
+    {% block scripts %}
+    <script src="{% static 'scripts/list_prop.js' %}"></script>
+    {% endblock %}
 
 
 
