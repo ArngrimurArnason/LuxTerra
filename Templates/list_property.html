@@ -33,7 +33,7 @@
             <div class="row mb-3 align-items-center">
               <label class="col-sm-4 col-form-label text-end">Location:</label>
               <div class="col-sm-8">{{ form.location }}</div>
-
+            </div>
             <div class="row mb-3 align-items-center">
               <label class="col-sm-4 col-form-label text-end">Property type:</label>
               <div class="col-sm-8">{{ form.property_type }}</div>
@@ -68,11 +68,12 @@
             </div>
             <div class="row mb-3 align-items-center">
               <label class="col-sm-4 col-form-label text-end">Build date:</label>
-              <div class="col-sm-8">
+              <div class="col-sm-8 d-flex gap-2">
                 {{ form.build_date }}
               </div>
             </div>
-          </div>
+            </div>
+
 
 
           <!-- start of right column -->
@@ -96,10 +97,11 @@
               <label class="col-sm-4 col-form-label text-end">Description:</label>
               <div class="col-sm-8">{{ form.description }}</div>
             </div>
+              </form>
           </div>
         </div>
         </div>
-              </form>
+
 
 
 

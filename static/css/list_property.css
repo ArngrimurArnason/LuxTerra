@@ -220,23 +220,18 @@ select.date-select {
   margin-right: 0;
 }
 
-/* Optional: style all three selects inline */
-select[name$='_day'],
-select[name$='_month'],
-select[name$='_year'] {
-  width: auto;
-  border: none;
-  background: none;
-  box-shadow: none;
-  font-size: 1rem;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding: 0 8px;
+select {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+select[name*="build_date_"] {
+  flex: 1;
+  min-width: 100px;
+  max-width: 120px;
 }
 
-select[name$='_day']:focus,
-select[name$='_month']:focus,
-select[name$='_year']:focus {
-  outline: none;
-}
