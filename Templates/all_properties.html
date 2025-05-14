@@ -17,13 +17,8 @@
                 Postal code
                 <select name="postal_code" class="custom-select">
                     <option value="">Any</option>
-                    <option value="101">101</option>
-                    <option value="105">105</option>
-                    <option value="220">220</option>
-                    <option value="221">221</option>
-                    <option value="800">800</option>
-                    <option value="200">200</option>
-                    <!-- Add more -->
+                    <option value="102" {% if request.GET.postal_code == "102" %}selected{% endif %}>102</option>
+
                 </select>
             </label>
 
@@ -94,24 +89,33 @@
     {% for p in properties %}
     <div class="card prop">
         <a href="{% url 'property_details' p.property_id %}" class="card-link">
-            <div class="property-image" style="background-image: url('{{ p.thumbnail }}');">
+            <div class="property-image" style="background-image: url('{{ p.thumbnail.url }}');">
                 <div class="property-address">
                     Íbúðareign: {{ p.post_code }} {{ p.city }}
                 </div>
             </div>
             <div class="card-body">
-                <h3 class="property-street">{{ p.street }} {{ p.house_number }}</h3>
+                <!-- Street + Location in same row -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="property-street mb-0">{{ p.street }} {{ p.house_number }}</h3>
+                    <p class="text-muted mb-0">{{ p.location }}</p>
+                </div>
+
+                <!-- One divider above icons -->
+                <hr class="my-2">
 
                 <div class="property-details">
                     <div class="size-detail">{{ p.size }} m²</div>
                     <div class="room-detail">{{ p.bedrooms }}</div>
                     <div class="bathroom-detail">{{ p.bathroom }}</div>
                 </div>
+
+                <!-- No extra <hr> here -->
                 <div class="property-price">{{ p.price }} kr</div>
             </div>
         </a>
     </div>
-    {% endfor %}
+{% endfor %}
 </div>
 
 {% endblock %}
