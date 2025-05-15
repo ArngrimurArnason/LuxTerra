@@ -18,12 +18,10 @@ def offer_history(request):
 def edit_profile(request):
     return render(request, 'edit_profile.html')
 
-def my_listings(request):
-    return render(request, 'my_listings.html')
+def incoming_offers(request):
+    return render(request, 'incoming_offers.html')
 
 
-
-User = get_user_model()
 
 def login_view(request):
     if request.method == 'POST':
