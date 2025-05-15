@@ -35,22 +35,26 @@ body {
 }
 
 /* Property Title & Price */
+.property-header {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
 .property-title {
-    font-size: 36px;
-    margin: 20px 0 10px;
-    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
     color: #2d3b2c;
+    margin-bottom: 0;
 }
 
 .property-price {
-    font-size: 3rem;
-    text-align: right;
-    padding-right: 40px;
+    font-size: 2.5rem;
+    font-weight: bold;
     color: #2d3b2c;
-    font-family: "Bookman Old Style", sans-serif !important;
 }
 
-/* Icons row */
+
 .property-icons {
     display: flex;
     justify-content: center;
@@ -65,8 +69,7 @@ body {
     min-width: 60px;
 }
 
-/* Amenities & Description */
-.property-amenities,
+
 .property-description {
     text-align: center;
     margin: 20px auto;
@@ -77,45 +80,69 @@ body {
 
 /* Offer form */
 .offer-box {
-      border: 1px solid #3e5139;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 280px;
-      float: right;
-      margin-right: 40px;
+    border: 1px solid #3e5139;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 280px;
+    float: right;
+    margin-right: 40px;
 }
 
 .offer-box label {
-      font-size: 18px;
-      display: block;
-      margin-bottom: 5px;
-      color: #3e5139;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+    color: #3e5139;
 }
 
 .offer-box input {
-      width: 100%;
-      padding: 6px;
-      border: 1px solid #3e5139;
-      border-radius: 4px;
-      font-size: 16px;
-      margin-bottom: 10px;
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #3e5139;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .offer-box button {
-      width: 100%;
-      background-color: #3e5139;
-      color: #e8e6b7;
-      padding: 10px;
-      border: none;
-      font-size: 18px;
-      border-radius: 25px;
-      font-family: "Bookman Old Style", sans-serif !important;
+    width: 100%;
+    background-color: #3e5139;
+    color: #e8e6b7;
+    padding: 10px;
+    border: none;
+    font-size: 18px;
+    border-radius: 25px;
+    font-family: "Bookman Old Style", sans-serif !important;
 }
 
 .offer-box button:hover {
     background-color: #2d4226;
     color: #e3dfb8;
 }
+
+.property-description-box {
+    background-color: #ffffff;
+    padding: 20px 30px 20px 20px;
+    border-radius: 10px;
+    border: 1px solid #3e5139;
+    color: #2d3b2c;
+    max-width: 700px;
+    font-size: 1.1rem;
+}
+
+
+.property-description-box strong {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #2d3b2c;
+}
+
+.property-description-box p {
+    margin: 0;
+    line-height: 1.6;
+}
+
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
@@ -140,12 +167,12 @@ body {
 }
 .bathroom-detail, .room-detail, .type-detail, .age-detail, .size-detail {
       display: inline-block;
-      vertical-align: center;
-      width: 35px;
-      height: 35px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      margin-right: 6px;
+    vertical-align: center;
+    width: 35px;
+    height: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 6px;
 }
 
 .room-detail::before {
@@ -159,8 +186,9 @@ body {
 }
 
 .age-detail::before {
-    content: "📆";
+    content: "🔨";
     font-size: 2rem;
+
 }
 .type-detail::before {
     content: "🏡";
