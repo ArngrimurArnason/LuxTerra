@@ -1,0 +1,14 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/finalize_steps.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="finalize-container">
+        <div class="text-center mt-5">
+      <h2>🎉 Purchase Finalized!</h2>
+      <p>Thank you! Your offer has been submitted and the property is finalized.</p>
+      <a href="/" class="btn btn-primary mt-3">Go to Homepage</a>
+    </div>
+    </div>
+{%  endblock %}

@@ -36,9 +36,6 @@ def make_offer(request, property_id):
         'form': form,
         'property': property_obj
     })
-def finalize_offer(request, offer_id):
-    offer = get_object_or_404(Offer, pk=offer_id)
-    return render(request, 'offers/finalize_offer.html', {'offer': offer})
 
 def incoming_offer(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id)
@@ -107,28 +104,15 @@ def update_offer_status(request, offer_id):
         messages.error(request, "Invalid status.")
     return redirect('incoming_offers')
 
-def finalize_offer(request, offer_id):
-    offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
-
-    if request.method == 'POST':
-        # Delete both offer and associated property
-        property_obj = offer.property
-        offer.delete()
-        property_obj.delete()
-
-        messages.success(request, "Offer finalized and property removed.")
-        return redirect('offer_history')
-
-    return render(request, 'offers/finalize_offer.html', {'offer': offer})
 
 COUNTRIES = ["Iceland", "Norway", "Sweden", "Denmark", "Finland"]
 
 @login_required
 def finalize_step1(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
+    data = request.session.get('finalize_data', {})
 
     if request.method == 'POST':
-        # Save contact info to session
         request.session['finalize_data'] = {
             'street': request.POST.get('street'),
             'city': request.POST.get('city'),
@@ -138,7 +122,11 @@ def finalize_step1(request, offer_id):
         }
         return redirect('finalize_step2', offer_id=offer_id)
 
-    return render(request, 'offers/finalize_step1.html', {'offer': offer, 'countries': COUNTRIES})
+    return render(request, 'offers/finalize_step1.html', {
+        'offer': offer,
+        'countries': COUNTRIES,
+        'data': data
+    })
 
 
 @login_required
@@ -164,7 +152,9 @@ def finalize_step2(request, offer_id):
         request.session['finalize_data'] = finalize_data
         return redirect('finalize_step3', offer_id=offer_id)
 
-    return render(request, 'offers/finalize_step2.html', {'offer': offer})
+    return render(request, 'offers/finalize_step2.html', {
+        'offer': offer,
+        'data': finalize_data})
 
 
 @login_required

@@ -1,0 +1,26 @@
+{%  extends 'Home/base.html' %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/finalize_steps.css' %}">
+{% endblock %}
+{%  block content %}
+    <div class="finalize-container">
+        <form method="post">
+          {% csrf_token %}
+          <h3>Contact Information</h3>
+          <input name="street" placeholder="Street" value="{{ data.street|default:'' }}" class="form-control mb-2">
+            <input name="city" placeholder="City" value="{{ data.city|default:'' }}" class="form-control mb-2">
+            <input name="postal_code" placeholder="Postal Code" value="{{ data.postal_code|default:'' }}" class="form-control mb-2">
+
+            <select name="country" class="form-control mb-2">
+              {% for c in countries %}
+                <option value="{{ c }}" {% if data.country == c %}selected{% endif %}>{{ c }}</option>
+              {% endfor %}
+            </select>
+
+            <input name="kennitala" placeholder="Kennitala" value="{{ data.kennitala|default:'' }}" class="form-control mb-3">
+
+                      <button type="submit" class="btn btn-primary">Next</button>
+        </form>
+    </div>
+{%  endblock %}

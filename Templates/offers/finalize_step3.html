@@ -1,0 +1,27 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/finalize_steps.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="finalize-container">
+            <h3>Review Your Information</h3>
+        <ul>
+          <li>Address: {{ data.street }}, {{ data.city }}, {{ data.postal_code }}, {{ data.country }}</li>
+          <li>Kennitala: {{ data.kennitala }}</li>
+          <li>Payment Method: {{ data.payment_method|title }}</li>
+          {% if data.payment_method == 'credit_card' %}
+            <li>Cardholder: {{ data.cardholder }}</li>
+          {% elif data.payment_method == 'bank_transfer' %}
+            <li>IBAN: {{ data.iban }}</li>
+          {% elif data.payment_method == 'mortgage' %}
+            <li>Provider: {{ data.provider }}</li>
+          {% endif %}
+        </ul>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success">Confirm</button>
+            <a href="{% url 'finalize_step2' offer.offer_id %}" class="btn btn-secondary mt-3">← Back</a>
+        </form>
+    </div>
+{%  endblock %}

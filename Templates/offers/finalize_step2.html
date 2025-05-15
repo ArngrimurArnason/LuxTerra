@@ -1,0 +1,46 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/finalize_steps.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="finalize-container">
+        <form method="post">
+      {% csrf_token %}
+      <h3>Select Payment Method</h3>
+      <select name="payment_method" class="form-control mb-3" id="method-select">
+        <option value="credit_card" {% if data.payment_method == 'credit_card' %}selected{% endif %}>Credit Card</option>
+        <option value="bank_transfer" {% if data.payment_method == 'bank_transfer' %}selected{% endif %}>Bank Transfer</option>
+        <option value="mortgage" {% if data.payment_method == 'mortgage' %}selected{% endif %}>Mortgage</option>
+      </select>
+
+      <!-- Credit Card Fields -->
+      <div id="credit_card_fields">
+        <input name="cardholder" value="{{ data.cardholder|default:'' }}" placeholder="Cardholder Name" class="form-control mb-2">
+        <input name="card_number" value="{{ data.card_number|default:'' }}" placeholder="Card Number" class="form-control mb-2">
+        <input name="expiry_date" value="{{ data.expiry_date|default:'' }}" placeholder="Expiry Date" class="form-control mb-2">
+        <input name="cvc" value="{{ data.cvc|default:'' }}" placeholder="CVC" class="form-control mb-2">
+      </div>
+
+      <!-- Bank Transfer Fields -->
+      <div id="bank_transfer_fields" style="display: none;">
+        <input name="iban" value="{{ data.iban|default:'' }}" placeholder="IBAN" class="form-control mb-2">
+        <input name="swift" value="{{ data.swift|default:'' }}" placeholder="SWIFT/BIC" class="form-control mb-2">
+      </div>
+
+      <!-- Mortgage Fields -->
+      <div id="mortgage_fields" style="display: none;">
+        <input name="provider" value="{{ data.provider|default:'' }}" placeholder="Mortgage Provider" class="form-control mb-2">
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'finalize_step1' offer.offer_id %}" class="btn btn-secondary">← Back</a>
+        <button type="submit" class="btn btn-primary">Next</button>
+      </div>
+    </form>
+    </div>
+
+
+
+    <script src="{% static 'app/finalize_offer2.js' %}"></script>
+{%  endblock %}
