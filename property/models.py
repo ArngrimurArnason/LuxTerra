@@ -71,6 +71,7 @@ class Property(models.Model):
     property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES)
     price = models.IntegerField()
     build_date = models.DateField()
+    listing_date = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=4096)
     bathroom = models.IntegerField()
     bedrooms = models.IntegerField()

@@ -1,10 +1,11 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+from django.forms import ModelForm, ClearableFileInput
 from user.models import User
+from django.core.exceptions import ValidationError
 import re
 
-
+class NoClearableFileInput(ClearableFileInput):
+    template_with_clear = ''
 class EditProfileForm(ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
@@ -26,8 +27,8 @@ class EditProfileForm(ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'national_id': forms.NumberInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
-            'logo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-            'profile_img': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'logo': NoClearableFileInput(attrs={'class': 'form-control'}),
+            'profile_img': NoClearableFileInput(attrs={'class': 'form-control'}),
             'bio': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
