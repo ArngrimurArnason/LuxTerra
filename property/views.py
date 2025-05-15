@@ -43,6 +43,10 @@ def properties_view(request):
         properties = properties.order_by('build_date')
     elif order_by == 'date_desc':
         properties = properties.order_by('-build_date')
+    elif order_by == 'name_asc':
+        properties = properties.order_by('street')
+    elif order_by == 'name_desc':
+        properties = properties.order_by('-street')
 
     # Filters
     if postal_code:

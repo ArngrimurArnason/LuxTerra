@@ -94,6 +94,11 @@
                 <option value="date_desc" {% if request.GET.order_by == "date_desc" %}selected{% endif %}>Newest First</option>
                 <option value="date_asc" {% if request.GET.order_by == "date_asc" %}selected{% endif %}>Oldest First</option>
               </optgroup>
+
+              <optgroup label="Street name">
+                <option value="name_asc" {% if request.GET.order_by == "name_asc" %}selected{% endif %}>A to Z</option>
+                <option value="name_desc" {% if request.GET.order_by == "name_desc" %}selected{% endif %}>Z to A</option>
+              </optgroup>
             </select>
         </div>
     </div>
