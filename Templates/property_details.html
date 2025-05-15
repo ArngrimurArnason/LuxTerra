@@ -1,89 +1,85 @@
 {% extends 'Home/base.html' %}
 {% block content %}
 {% load static %}
-<head>
-  <title>Dynamic Carousel</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"/>
-    <link href="{% static 'css/property_details.css'%}" rel="stylesheet">
-</head>
-<body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/property_details.css' %}">
 
-<div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators" id="carousel-indicators"></div>
-  <div class="carousel-inner" id="carousel-inner"></div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+<div class="container my-4">
 
+  <!-- Carousel -->
+        <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for image in images %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" class="d-block w-100" alt="Property image">
+              </div>
+            {% endfor %}
+          </div>
 
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6">
-        <h2 id="propertyAddress"></h2>
-        <p id="propertyPrice" class="text-muted"></p>
-        <div class="property-amenities mb-3" id="propertyAmenities"></div>
-        <p id="propertyDescription"></p>
-        <div class="seller-info mt-4">
-          <p>Seller: <span id="sellerName"></span></p>
-          <label for="offerPrice" class="form-label">Offer Price:</label>
-          <input type="number" id="offerPrice" name="offerPrice" class="form-control mb-3">
-          <button id="makeOfferButton" class="btn btn-primary">Make Offer</button>
-        </div>
-      </div>
-    </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                  <path d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753"/>
+                </svg>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+                  <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753"/>
+              </svg>
+            <span class="visually-hidden">Next</span>
+          </button>
+            <div class="position-absolute top-0 end-0 m-3 bg-dark text-white px-3 py-2 rounded">
+              <i class="bi bi-calendar-event"></i> {{ property.build_date }}
+            </div>
+          </div>
+
+  <!-- Title + Price -->
+  <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap">
+    <h2>{{ property.street }} {{ property.house_number }}, {{ property.location }}</h2>
+    <h3 class="text-end">{{ property.price|floatformat:0 }} kr.</h3>
   </div>
 
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Icons -->
+  <div class="d-flex flex-wrap align-items-center gap-4 fs-5 mt-3">
+    <span><i class="bi bi-bathtub"></i> {{ property.bathroom }}</span>
+    <span><i class="bi bi-door-closed"></i> {{ property.bedrooms }}</span>
+    <span><i class="bi bi-house"></i> {{ property.property_type }}</span>
+    <span><i class="bi bi-calendar-range"></i> {{ property.build_date.year }}</span>
+    <span><i class="bi bi-aspect-ratio"></i> {{ property.size }} m&sup2;</span>
+  </div>
 
+  <!-- Amenities -->
+  {% if property.amenities %}
+    <div class="mt-3">
+      <strong>Amenities:</strong> {{ property.amenities }}
+    </div>
+  {% endif %}
 
-<script>
-  const images = [
-    'image1.jpg',
-    'image2.jpg',
-    'image3.jpg'
-    // Add more image URLs here
-  ];
+  <!-- Description -->
+  <div class="mt-3">
+    <strong>Description:</strong>
+    <p>{{ property.description }}</p>
+  </div>
 
-  const indicatorsContainer = document.getElementById('carousel-indicators');
-  const innerContainer = document.getElementById('carousel-inner');
+  <!-- Offer Section -->
+        <div class="d-flex justify-content-between align-items-start mt-5 flex-wrap">
+          <div></div> <!-- filler -->
 
-  images.forEach((image, index) => {
-    // Create indicator button
-    const indicator = document.createElement('button');
-    indicator.type = 'button';
-    indicator.dataset.bsTarget = '#carouselExampleIndicators';
-    indicator.dataset.bsSlideTo = index;
-    indicator.ariaLabel = `Slide ${index + 1}`;
-    if (index === 0) {
-      indicator.classList.add('active');
-      indicator.ariaCurrent = 'true';
-    }
-    indicatorsContainer.appendChild(indicator);
+          <div class="border rounded p-3 bg-light" style="min-width: 280px;">
+            <p><strong>Seller:</strong> {{ property.user.get_full_name }}</p>
 
-    // Create carousel item
-    const item = document.createElement('div');
-    item.classList.add('carousel-item');
-    if (index === 0) {
-      item.classList.add('active');
-    }
-    const img = document.createElement('img');
-    img.src = image;
-    img.classList.add('d-block', 'w-100');
-    img.alt = `Slide ${index + 1}`;
-    item.appendChild(img);
-    innerContainer.appendChild(item);
-  });
-</script>
+            <form method="post">
+              {% csrf_token %}
+              <label for="offer_price" class="form-label">Offer price:</label>
+              <input type="number" name="offer_price" id="offer_price" class="form-control mb-3" required>
+              <button type="submit" class="btn btn-success w-100">Make offer</button>
+            </form>
+          </div>
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+  </div>
+
+</div>
+
 
 {% endblock %}

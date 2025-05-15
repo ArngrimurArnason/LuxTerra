@@ -35,8 +35,8 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="{% url 'account_info' %}">My Profile</a></li>
                   <li><a class="dropdown-item" href="{% url 'offer_history' %}">Offer History</a></li>
-                  <li><a class="dropdown-item" href="{% url 'my_listings' %}">My Listings</a></li>
-
+                  <li><a class="dropdown-item" href="{% url 'incoming_offers' %}">Incoming Offers</a></li>
+                  <li><a class="dropdown-item" href="{% url 'incoming_offers' %}">Edit Profile</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <form method="post" action="{% url 'logout' %}" style="display: block; margin: 0;">
                     {% csrf_token %}

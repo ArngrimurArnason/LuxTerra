@@ -237,3 +237,13 @@
     background-position: right 12px center;
     background-size: 10px;
 }
+
+.property-label {
+    background-color: #375635;
+    color: white;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 8px;
+}

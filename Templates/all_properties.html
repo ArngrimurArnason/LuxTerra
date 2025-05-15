@@ -14,17 +14,17 @@
     <div class="filter-container">
         <div class="filters">
             <label>
-                Postal code
-                <select name="postal_code" class="custom-select">
-                    <option value="">Any</option>
-                    <option value="101">101</option>
-                    <option value="105">105</option>
-                    <option value="220">220</option>
-                    <option value="221">221</option>
-                    <option value="800">800</option>
-                    <option value="200">200</option>
-                    <!-- Add more -->
-                </select>
+              Postal code
+              <select name="postal_code" class="custom-select">
+                <option value="">Any</option>
+                {% for city, codes in grouped_postal_codes.items %}
+                  <optgroup label="{{ city }}">
+                    {% for code in codes %}
+                      <option value="{{ code }}" {% if request.GET.postal_code == code %}selected{% endif %}>{{ code }}</option>
+                    {% endfor %}
+                  </optgroup>
+                {% endfor %}
+              </select>
             </label>
 
             <label>
@@ -64,7 +64,7 @@
 
             <label>
                 Street name
-                <input type="text" name="street_name" class="custom-input" placeholder="">
+                <input type="text" name="street_name" class="custom-input" placeholder="" value="{{ request.GET.street_name }}">
             </label>
 
             <label>
@@ -77,15 +77,23 @@
     </div>
     <div class="sort-container-wrapper">
         <div class="sort-container">
-            <label for="order_by">Order by</label>
-            <select name="order_by" id="order_by" class="custom-select">
-                <option value="">Default</option>
-                <option value="price_asc">Price: Low to High</option>
-                <option value="price_desc">Price: High to Low</option>
-                <option value="size_asc">Size: Small to Large</option>
-                <option value="size_desc">Size: Large to Small</option>
-                <option value="date_desc">Newest First</option>
-                <option value="date_asc">Oldest First</option>
+            <select name="order_by" class="custom-select">
+              <option value="">Default</option>
+
+              <optgroup label="Price">
+                <option value="price_asc" {% if request.GET.order_by == "price_asc" %}selected{% endif %}>Low to High</option>
+                <option value="price_desc" {% if request.GET.order_by == "price_desc" %}selected{% endif %}>High to Low</option>
+              </optgroup>
+
+              <optgroup label="Size">
+                <option value="size_asc" {% if request.GET.order_by == "size_asc" %}selected{% endif %}>Small to Large</option>
+                <option value="size_desc" {% if request.GET.order_by == "size_desc" %}selected{% endif %}>Large to Small</option>
+              </optgroup>
+
+              <optgroup label="Build date">
+                <option value="date_desc" {% if request.GET.order_by == "date_desc" %}selected{% endif %}>Newest First</option>
+                <option value="date_asc" {% if request.GET.order_by == "date_asc" %}selected{% endif %}>Oldest First</option>
+              </optgroup>
             </select>
         </div>
     </div>
@@ -94,24 +102,33 @@
     {% for p in properties %}
     <div class="card prop">
         <a href="{% url 'property_details' p.property_id %}" class="card-link">
-            <div class="property-image" style="background-image: url('{{ p.thumbnail }}');">
-                <div class="property-address">
-                    Íbúðareign: {{ p.post_code }} {{ p.city }}
-                </div>
+            <div class="property-image" style="background-image: url('{{ p.thumbnail.url }}');">
+                <div class="property-label">
+                    {{ p.property_type }}
+                  </div>
             </div>
             <div class="card-body">
-                <h3 class="property-street">{{ p.street }} {{ p.house_number }}</h3>
+                <!-- Street + Location in same row -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="property-street mb-0">{{ p.street }} {{ p.house_number }}</h3>
+                    <p class="text-muted mb-0">{{ p.location }}</p>
+                </div>
+
+                <!-- One divider above icons -->
+                <hr class="my-2">
 
                 <div class="property-details">
                     <div class="size-detail">{{ p.size }} m²</div>
                     <div class="room-detail">{{ p.bedrooms }}</div>
                     <div class="bathroom-detail">{{ p.bathroom }}</div>
                 </div>
+
+                <!-- No extra <hr> here -->
                 <div class="property-price">{{ p.price }} kr</div>
             </div>
         </a>
     </div>
-    {% endfor %}
+{% endfor %}
 </div>
 
 {% endblock %}
