@@ -114,7 +114,7 @@ def list_property(request):
             for image in image_files:
                 PropertyImages.objects.create(property=property, image=image)
 
-            messages.success(request, 'Listing published to admin.')
+            messages.success(request, 'Listing published to properties, you can view it under my profile.')
             # Don't redirect — just re-render the same page with an empty form
             form = ListPropertyForm()
             return render(request, 'list_property.html', {'form': form})
