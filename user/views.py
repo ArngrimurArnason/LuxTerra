@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from .models import User
-
+from django.contrib.auth.decorators import login_required
 from user.Forms.sign_up_form import SignUpForm
 
 
@@ -15,8 +15,15 @@ def account_info(request):
 def offer_history(request):
     return render(request, 'offer_history.html')
 
+@login_required
 def edit_profile(request):
-    return render(request, 'edit_profile.html')
+    user = request.user
+    if request.method == 'POST':
+        print(1)
+    else:
+        return render(request, 'edit_profile.html', {
+            'form':None
+        })
 
 def incoming_offers(request):
     return render(request, 'incoming_offers.html')
