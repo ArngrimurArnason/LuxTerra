@@ -58,12 +58,10 @@
       <div class="row g-0 h-100">
 
         <!-- Property Image -->
-        <div class="col-md-4">
-          {% if property.thumbnail %}
-            <img src="{{ property.thumbnail.url }}" class="img-fluid rounded-start h-100 w-100" style="object-fit: cover;" alt="Property Image">
-          {% else %}
-            <img src="{% static 'default-property.jpg' %}" class="img-fluid rounded-start h-100 w-100" style="object-fit: cover;" alt="No Image">
-          {% endif %}
+        <div class="col-md-4 h-100">
+            <div class="h-100">
+            <img src="{{ property.thumbnail.url }}" class="property-card-img" style="object-fit: cover;" alt="Property Image">
+            </div>
         </div>
 
         <!-- Property Info + Bio -->
