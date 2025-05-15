@@ -26,7 +26,7 @@ urlpatterns = [
     path('', views.home, name='home'),  # Homepage route (LuxTerra views)
     path('about/', views.about, name='about'),  # About page (LuxTerra views)
     path('contact/', views.contact, name='contact'),  # Contact page (LuxTerra views)
-
+    path('offer/', include('offer.urls')),
     path('user/', include('user.urls')),  # User app URLs
     path('properties/', include('property.urls')),  # Property app URLs
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

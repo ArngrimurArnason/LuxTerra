@@ -78,7 +78,7 @@
               </div>
             {% endif %}
 
-          <form method="post">
+          <form method="post" action="{% url 'make_offer' property.property_id %}">
             {% csrf_token %}
             {{ form.offer_price.label_tag }}
             {{ form.offer_price }}
