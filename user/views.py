@@ -8,6 +8,7 @@ from .Forms.edit_profile_form import EditProfileForm
 from .models import User
 from django.contrib.auth.decorators import login_required
 from user.Forms.sign_up_form import SignUpForm
+from offer.models import Offer
 
 
 # Create your views here.
@@ -15,9 +16,10 @@ def account_info(request):
     return render(request, 'account_info.html')
 
 def offer_history(request):
-    return render(request, 'offer_history.html')
+    user_offers = Offer.objects.select_related('property', 'user').filter(user=request.user)
+    return render(request, 'offer_history.html', {'offers': user_offers})
 
-@login_required
+
 def edit_profile(request):
     user = request.user
 

@@ -8,6 +8,7 @@ class Offer(models.Model):
     offer_price = models.IntegerField()
     offer_date = models.DateField()
     offer_expiry_date = models.DateField()
+    status = models.CharField(max_length=20, choices=[('pending', 'Pending'),('contingent', 'Contingent'), ('accepted', 'Accepted'), ('rejected', 'Rejected')], default='pending')
 
 
 

@@ -76,7 +76,6 @@ class Property(models.Model):
     bathroom = models.IntegerField()
     bedrooms = models.IntegerField()
     size = models.IntegerField()
-    property_status = models.BooleanField()
     thumbnail = models.ImageField(upload_to='property_thumbnails/', blank=True, null=True)
 
 def __str__(self):

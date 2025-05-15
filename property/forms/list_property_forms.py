@@ -13,7 +13,7 @@ class ListPropertyForm(ModelForm):
     class Meta:
         model = Property
         exclude = ['property_id']
-        fields = ['street', 'house_number', 'location', 'property_type', 'price','build_date', 'description', 'bathroom', 'bedrooms', 'size', 'property_status', 'thumbnail']
+        fields = ['street', 'house_number', 'location', 'property_type', 'price','build_date', 'description', 'bathroom', 'bedrooms', 'size', 'thumbnail']
         widgets = {
             'street': forms.TextInput(attrs={'class': 'form-control'}),
             'house_number': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -27,7 +27,6 @@ class ListPropertyForm(ModelForm):
             'bathroom': forms.NumberInput(attrs={'class': 'form-control quantity-input', 'min': 0}),
             'bedrooms': forms.NumberInput(attrs={'class': 'form-control quantity-input', 'min': 0}),
             'size': forms.NumberInput(attrs={'class': 'form-control quantity-input', 'min': 0}),
-            'property_status': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'thumbnail': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
