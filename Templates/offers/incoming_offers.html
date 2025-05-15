@@ -1,4 +1,82 @@
 {% extends 'Home/base.html' %}
-{% block content %}
 {% load static %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/offer_history.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-5" style="color: #41563B; font-family: 'Bookman Old Style', serif;">Incoming Offers</h2>
+
+  {% for offer in offers %}
+  <!-- 🔝 Property Title + Price -->
+  <div class="row mb-1">
+    <div class="col-md-6">
+      <h5 style="font-family: 'Bookman Old Style', serif;">
+        {{ offer.property.street }} {{ offer.property.house_number }}, {{ offer.property.location }}
+      </h5>
+    </div>
+    <div class="col-md-6 text-end">
+      <h5 class="text-muted">{{ offer.property.price|floatformat:0 }} kr.</h5>
+    </div>
+  </div>
+
+  <!-- 📦 Offer Content Block -->
+  <div class="row mb-4 p-3 border-bottom align-items-center">
+    <div class="col-md-3">
+      <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="img-fluid rounded shadow-sm">
+    </div>
+
+    <div class="col-md-6">
+      <p>
+        <strong>Offer:</strong>
+        <span class="badge rounded-pill border border-success text-success px-3 py-2">
+          {{ offer.offer_price|floatformat:0 }} kr.
+        </span>
+      </p>
+      <p>
+        Offer made: {{ offer.offer_date }}<br>
+        Expires in: {{ offer.offer_expiry_date|timeuntil }}<br>
+        <strong>Status:</strong>
+        <span class="badge bg-light text-dark border">{{ offer.status|title }}</span>
+      </p>
+    </div>
+
+    <div class="col-md-3 text-end">
+      <div class="seller-link mb-2">
+        <img src="{{ offer.user.profile_img.url }}" class="seller-profile-img-lg" alt="Buyer Image">
+        <span><strong>Buyer:</strong> {{ offer.user.username }}</span>
+      </div>
+
+      {% if offer.status == 'pending' %}
+      <!-- Accept / Reject -->
+      <form method="post" action="{% url 'update_offer_status' offer.offer_id %}" class="d-flex flex-column gap-1 mt-2">
+        {% csrf_token %}
+        <button type="submit" name="status" value="accepted" class="btn btn-success btn-sm">Accept</button>
+        <button type="submit" name="status" value="rejected" class="btn btn-danger btn-sm">Reject</button>
+      </form>
+
+      <!-- Counter Offer Input -->
+      <form method="post" action="{% url 'make_counter_offer' offer.offer_id %}" class="d-flex align-items-center gap-2 mt-2">
+        {% csrf_token %}
+        <input type="number" name="counter_price" min="1" class="form-control form-control-sm" placeholder="Counter Offer" style="width: 120px;">
+        <button type="submit" class="btn btn-warning btn-sm">Send Counter Offer</button>
+      </form>
+
+    {% elif offer.status == 'accepted' %}
+      <div class="mt-2 text-muted fst-italic">Waiting for finalization</div>
+
+    {% elif offer.status == 'contingent' %}
+      <!-- Optional: allow another counter -->
+      <form method="post" action="{% url 'make_counter_offer' offer.offer_id %}" class="d-flex align-items-center gap-2 mt-2">
+        {% csrf_token %}
+        <input type="number" name="counter_price" min="1" class="form-control form-control-sm" placeholder="New Counter Offer" style="width: 120px;">
+        <button type="submit" class="btn btn-outline-primary btn-sm">Update Counter</button>
+      </form>
+    {% endif %}
+
+    </div>
+  </div>
+{% endfor %}
+</div>
 {% endblock %}

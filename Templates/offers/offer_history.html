@@ -17,13 +17,26 @@
 
     <!-- Offer Details -->
     <div class="col-md-6">
-      <h4 style="font-family: 'Bookman Old Style', serif;">{{ offer.property.address }}</h4>
-      <p>
-        <strong>Your offer:</strong>
-        <span class="badge rounded-pill border border-success text-success px-3 py-2">
-          {{ offer.offer_price|floatformat:0 }} kr.
-        </span>
-      </p>
+      <h4 style="font-family: 'Bookman Old Style', serif;">
+        {{ offer.property.street }} {{ offer.property.house_number }}, {{ offer.property.location }}
+      </h4>
+
+      {% if offer.status == 'contingent' %}
+        <p>
+          <strong>Seller's Counter Offer:</strong>
+          <span class="badge rounded-pill border border-warning text-warning px-3 py-2">
+            {{ offer.offer_price|floatformat:0 }} kr.
+          </span>
+        </p>
+      {% else %}
+        <p>
+          <strong>Your offer:</strong>
+          <span class="badge rounded-pill border border-success text-success px-3 py-2">
+            {{ offer.offer_price|floatformat:0 }} kr.
+          </span>
+        </p>
+      {% endif %}
+
       <p>
         <i class="bi bi-calendar3"></i> Offer made: {{ offer.offer_date }}<br>
         Expires in: {{ offer.offer_expiry_date|timeuntil }}<br>
@@ -34,10 +47,10 @@
 
     <!-- Seller Info & Finalize -->
     <div class="col-md-3 text-end">
-      <a href="{% url 'home'  %}" class="seller-link">
-        <img src="{{ offer.property.user.profile_img.url }}" alt="Profile Image" class="seller-profile-img-lg">
-        <span><strong>Seller:</strong> {{ offer.property.user.username }}</span>
-      </a>
+      <a href="{% url 'account_info' offer.property.user.user_id %}" class="seller-link">
+          <img src="{{ offer.property.user.profile_img.url }}" alt="Seller Profile Image" class="seller-profile-img-lg">
+          <span><strong>Seller:</strong> {{ offer.property.user.username }}</span>
+        </a>
 
       {% if offer.status == 'accepted' %}
       <form action="{% url 'finalize_offer' offer.offer_id %}" method="post" class="mt-3">

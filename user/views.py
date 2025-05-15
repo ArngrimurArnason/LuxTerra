@@ -25,7 +25,11 @@ def account_info(request, user_id):
 
 def offer_history(request):
     Offer.objects.filter(user=request.user, offer_expiry_date__lt=timezone.now()).delete()
-    user_offers = Offer.objects.select_related('property', 'user').filter(user=request.user)
+    user_offers = Offer.objects.select_related('property', 'user').filter(
+        user=request.user,
+        property__isnull=False,
+        property__user__isnull=False
+    )
     return render(request, 'offers/offer_history.html', {'offers': user_offers})
 
 

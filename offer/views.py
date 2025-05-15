@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib import messages
 from datetime import timedelta
+from django.views.decorators.http import require_POST
 
 @login_required
 def make_offer(request, property_id):
@@ -42,3 +43,36 @@ def incoming_offer(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id)
     return render(request, 'offers/incoming_offers.html', {'offer': offer})
 
+
+def make_counter_offer(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, property__user=request.user)
+
+    if request.method == 'POST':
+        try:
+            counter_price = int(request.POST.get('counter_price', 0))
+            if counter_price <= 0:
+                raise ValueError("Invalid price")
+
+            # Set the new counter offer and mark as contingent
+            offer.offer_price = counter_price
+            offer.status = 'contingent'
+            offer.save()
+
+            messages.success(request, "Counter offer sent.")
+        except (ValueError, TypeError):
+            messages.error(request, "Please enter a valid counter offer price.")
+
+    return redirect('incoming_offers')
+
+
+@require_POST
+def update_offer_status(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, property__user=request.user)
+    new_status = request.POST.get('status')
+    if new_status in ['accepted', 'rejected', 'contingent']:
+        offer.status = new_status
+        offer.save()
+        messages.success(request, f"Offer marked as {new_status}.")
+    else:
+        messages.error(request, "Invalid status.")
+    return redirect('incoming_offers')

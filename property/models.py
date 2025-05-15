@@ -79,7 +79,7 @@ class Property(models.Model):
     thumbnail = models.ImageField(upload_to='property_thumbnails/', blank=True, null=True)
 
 def __str__(self):
-    return f"{self.street} {self.house_number} - {self.city}"
+    return f"{self.street} {self.house_number}, {self.location}"
 
 
 class PropertyImages(models.Model):
