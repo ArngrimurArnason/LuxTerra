@@ -29,6 +29,7 @@ def offer_history(request):
     return render(request, 'offers/offer_history.html', {'offers': user_offers})
 
 
+
 def edit_profile(request):
     user = request.user
 
@@ -49,8 +50,8 @@ def edit_profile(request):
     return render(request, 'edit_profile.html', {'form': form})
 
 def incoming_offers(request):
-    return render(request, 'offers/incoming_offers.html')
-
+    offers = Offer.objects.select_related('property', 'user').filter(property__user=request.user)
+    return render(request, 'offers/incoming_offers.html', {'offers': offers})
 
 
 def login_view(request):
