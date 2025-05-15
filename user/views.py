@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
+from django.contrib.auth import update_session_auth_hash
+from .Forms.edit_profile_form import EditProfileForm
 from .models import User
 from django.contrib.auth.decorators import login_required
 from user.Forms.sign_up_form import SignUpForm
@@ -18,12 +20,22 @@ def offer_history(request):
 @login_required
 def edit_profile(request):
     user = request.user
+
     if request.method == 'POST':
-        print(1)
+        form = EditProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            new_password = form.cleaned_data.get('password')
+            if new_password:
+                user.set_password(new_password)
+                update_session_auth_hash(request, user)
+            user.save()
+            messages.success(request, "Profile updated.")
+            return redirect('account_info')
     else:
-        return render(request, 'edit_profile.html', {
-            'form':None
-        })
+        form = EditProfileForm(instance=user)
+
+    return render(request, 'edit_profile.html', {'form': form})
 
 def incoming_offers(request):
     return render(request, 'incoming_offers.html')
