@@ -1,89 +1,78 @@
 body {
-  font-family: 'Cormorant Garamond', serif;
-  background-color: #f8f8f5;
-  color: #2d3b2c;
-  margin: 0;
-  padding: 0;
+    font-family: "Bookman Old Style", sans-serif !important;
+    background-color: #f8f8f5;
+    color: #2d3b2c;
+    margin: 0;
+    padding: 0;
 }
 
-/* Carousel */
+
 .carousel-inner img {
-  height: 550px;
-  object-fit: cover;
-  width: 100%;
+    height: 550px;
+    object-fit: contain;
+    width: 100%;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: white;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  background-size: 50% 50%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.bi.bi-caret-left {
-  height: 30px;
-  width: 30px;
-}
-.bi.bi-caret-right {
-  height: 30px;
-  width: 30px;
+    border-radius: 50%;
+    background-size: 50% 50%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Date badge */
 .date-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #3b5134;
-  color: white;
-  padding: 8px 15px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #3b5134;
+    color: white;
+    padding: 8px 15px;
+    font-family: "Bookman Old Style", sans-serif !important;
+    font-size: 18px;
+    border-radius: 5px;
 }
 
 /* Property Title & Price */
 .property-title {
-  font-size: 36px;
-  margin: 20px 0 10px;
-  text-align: center;
-  color: #2d3b2c;
+    font-size: 36px;
+    margin: 20px 0 10px;
+    text-align: center;
+    color: #2d3b2c;
 }
 
 .property-price {
-  font-size: 28px;
-  text-align: right;
-  padding-right: 40px;
-  color: #2d3b2c;
+    font-size: 3rem;
+    text-align: right;
+    padding-right: 40px;
+    color: #2d3b2c;
+    font-family: "Bookman Old Style", sans-serif !important;
 }
 
 /* Icons row */
 .property-icons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  font-size: 24px;
-  margin: 20px 0;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 24px;
+    margin: 20px 0;
+    flex-wrap: wrap;
 }
 
 .property-icons div {
-  text-align: center;
-  min-width: 60px;
+    text-align: center;
+    min-width: 60px;
 }
 
 /* Amenities & Description */
 .property-amenities,
 .property-description {
-  text-align: center;
-  margin: 20px auto;
-  max-width: 900px;
-  font-size: 18px;
-  color: #3e5139;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 900px;
+    font-size: 18px;
+    color: #3e5139;
 }
 
 /* Offer form */
@@ -115,12 +104,12 @@ body {
 .offer-box button {
   width: 100%;
   background-color: #3e5139;
-  color: white;
+  color: #e8e6b7;
   padding: 10px;
   border: none;
   font-size: 18px;
   border-radius: 25px;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Bookman Old Style", sans-serif !important;
 }
 
 .offer-box button:hover {
@@ -147,4 +136,41 @@ body {
     flex-direction: column;
     align-items: center;
   }
+}
+.bathroom-detail,
+.room-detail,
+.type-detail,
+.age-detail,
+.size-detail {
+  display: inline-block;
+  vertical-align: center;
+  width: 35px;
+  height: 35px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 6px;
+}
+
+
+.room-detail::before {
+    content: "🛏️";
+    font-size: 1.4rem;
+}
+
+.size-detail::before {
+    content: "📐";
+    font-size: 1.4rem;
+}
+
+.age-detail::before {
+    content: "📆";
+    font-size: 1.4rem;
+}
+.type-detail::before {
+    content: "🏡";
+    font-size: 1.4rem;
+}
+.bathroom-detail::before {
+    content: "🛁";
+    font-size: 1.4rem;
 }
