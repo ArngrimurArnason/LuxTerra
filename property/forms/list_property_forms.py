@@ -66,6 +66,12 @@ class ListPropertyForm(ModelForm):
             raise ValidationError("Number of bathrooms cannot be negative.")
         return val
 
+    def clean_bedrooms(self):
+        val = self.cleaned_data.get('bedrooms')
+        if val < 0:
+            raise ValidationError("Number of bedrooms cannot be negative.")
+        return val
+
     def clean_size(self):
         size = self.cleaned_data.get('size')
         if size <= 0:
