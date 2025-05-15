@@ -3,49 +3,101 @@
 {% load static %}
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"/>
-  <link href="{% static 'css/account_info.css' %}" rel="stylesheet">
+  <link rel= "stylesheet" href="{% static 'css/account_info.css' %}">
 </head>
 
 <div class="container-fluid py-4" style="min-height: calc(100vh - 200px);">
   <div class="row g-4 h-100">
 
-    <!-- Left: Profile Info -->
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body text-center">
-          <img src="{% static 'images/arnar3.jpg' %}" alt="Profile" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
-          <h3 class="card-title">John Doe</h3>
-          <p class="text-muted">Real Estate Agent based in Austin, TX. 10+ years of experience.</p>
-          <hr>
-          <p><strong>Email:</strong> john@example.com</p>
-          <p><strong>Phone:</strong> (123) 456-7890</p>
-        </div>
-      </div>
-    </div>
+<!-- Profile Section -->
+<div class="col-md-4">
+  <div class="card profile-card h-100">
+    <div class="card-body text-center">
 
-    <!-- Right: Property Listings -->
+      {% if user.profile_img %}
+        <img src="{{ user.profile_img.url }}" alt="Profile Picture" class="profile-img">
+      {% else %}
+        <img src="{% static 'images/person-circle.svg' %}" alt="Default Profile" class="profile-img">
+      {% endif %}
+
+      <h3>{{ user.username }}</h3>
+      <p>{{ user.email }}</p>
+      <p><strong>SSN:</strong> {{ user.national_id }}</p>
+
+      {% if user.logo %}
+        <hr>
+        <p class="section-label">Company Logo:</p>
+        <img src="{{ user.logo.url }}" alt="Logo" class="img-fluid mt-2 company-logo">
+      {% endif %}
+
+      {% if user.bio %}
+        <hr>
+        <p class="section-label">Bio:</p>
+        <p>{{ user.bio }}</p>
+      {% endif %}
+
+      {% if user.address %}
+        <hr>
+        <p class="section-label">Address:</p>
+        <p>{{ user.address }}</p>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Property Listings -->
     <div class="col-md-8">
       <div class="h-100" style="max-height: calc(100vh - 200px); overflow-y: auto; overflow-x: hidden;">
         <h4 class="mb-4">Properties Listed</h4>
-        <div class="row row-cols-1 row-cols-md-2 g-3">
 
-          <!-- Property Card (repeat this block) -->
-          <div class="col">
-            <div class="card h-100">
-              <img src="/path-to-property.jpg" class="card-img-top" alt="Property Image" style="height: 180px; object-fit: cover;">
-              <div class="card-body">
-                <h5 class="card-title">Modern Family Home</h5>
-                <p class="card-text text-muted">3 bed · 2 bath · 1,800 sqft</p>
-                <p class="card-text fw-bold text-success">$420,000</p>
-              </div>
-            </div>
-          </div>
+{% for property in properties %}
+  <a href="{% url 'property_details' property.property_id %}" class="text-decoration-none text-dark">
+    <div class="card mb-3" style="height: 200px;">
+      <div class="row g-0 h-100">
 
-          <!-- More cards here -->
-
+        <!-- Property Image -->
+        <div class="col-md-4">
+          {% if property.thumbnail %}
+            <img src="{{ property.thumbnail.url }}" class="img-fluid rounded-start h-100 w-100" style="object-fit: cover;" alt="Property Image">
+          {% else %}
+            <img src="{% static 'default-property.jpg' %}" class="img-fluid rounded-start h-100 w-100" style="object-fit: cover;" alt="No Image">
+          {% endif %}
         </div>
+
+        <!-- Property Info + Bio -->
+        <div class="col-md-8">
+          <div class="card-body h-100 d-flex flex-row justify-content-between align-items-start">
+            <div class="pe-3" style="width: 60%;">
+              <h5 class="card-title mb-1">{{ property.street }} {{ property.house_number }}</h5>
+              <p class="text-success fw-bold mb-2">{{ property.price }} kr</p>
+              <p class="mb-1"><strong>Size:</strong> {{ property.size }} m&sup2;</p>
+              <p class="mb-1"><strong>Location:</strong> {{ property.location }}</p>
+              <p class="mb-1"><strong>Type:</strong> {{ property.property_type }}</p>
+            </div>
+
+            {% if property.description %}
+              <div class="property-bio" style="width: 40%;">
+                <p class="mb-0"><strong>Bio:</strong> {{ property.description }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
       </div>
     </div>
+  </a>
+{% empty %}
+  <p class="text-muted">This user hasn't listed any properties yet.</p>
+{% endfor %}
+
+
+
+      </div>
+    </div>
+
+
 
   </div>
 </div>

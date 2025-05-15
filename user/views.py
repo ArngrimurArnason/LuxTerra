@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.contrib.auth import update_session_auth_hash
 from .Forms.edit_profile_form import EditProfileForm
 from .models import User
+from property.models import Property
 from django.contrib.auth.decorators import login_required
 from user.Forms.sign_up_form import SignUpForm
 from offer.models import Offer
@@ -13,7 +14,13 @@ from offer.models import Offer
 
 # Create your views here.
 def account_info(request):
-    return render(request, 'account_info.html')
+    user = request.user
+    properties = Property.objects.filter(user_id=user.user_id)
+
+    return render(request, 'account_info.html', {
+        'user': user,
+        'properties': properties
+    })
 
 def offer_history(request):
     user_offers = Offer.objects.select_related('property', 'user').filter(user=request.user)

@@ -1,21 +1,15 @@
-
-
-
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-
-from .forms.list_property_forms import ListPropertyForm
-from .models import Property, PropertyImages
-from django.shortcuts import get_object_or_404
-from django.db.models import Q
-from .models import Property, PropertyImages  # Make sure this import is there
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.shortcuts import render, redirect
 from collections import defaultdict
-from .models import LOCATION_CHOICES
-from .forms import list_property_forms  # and any others if needed
 
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, redirect, render
+from .forms.list_property_forms import ListPropertyForm
+from .models import LOCATION_CHOICES, Property, PropertyImages
+from offer.models import Offer
+from datetime import timedelta
+from django.utils import timezone
+from offer.forms.offer_forms import OfferForm
 
 def group_postal_codes():
     grouped = defaultdict(list)
@@ -132,11 +126,31 @@ def list_property(request):
     return render(request, 'list_property.html', {'form': form})
 
 
-def property_details(request, property_id):
-    property = get_object_or_404(Property, pk=property_id)
-    images = PropertyImages.objects.filter(property=property)
-    return render(request, 'property_details.html', {
-      "property": property,
-      "images": images,
-    })
 
+
+def property_details(request, property_id):
+    prop = get_object_or_404(Property, pk=property_id)
+    images = prop.images.all()
+
+    if request.method == 'POST':
+        form = OfferForm(request.POST)
+        if form.is_valid():
+            offer = form.save(commit=False)
+            offer.user = request.user
+            offer.property = prop
+            offer.offer_date = timezone.now()
+            offer.offer_expiry_date = timezone.now() + timedelta(days=30)
+            offer.save()
+            messages.success(request, "Your offer has been submitted successfully.")
+            return redirect('property_details', property_id=prop.pk)
+        else:
+            messages.error(request, "There was a problem with your offer. Please fix the errors.")
+    else:
+        default_expiry = timezone.now().date() + timedelta(days=30)
+        form = OfferForm(initial={'offer_expiry_date': default_expiry})
+
+    return render(request, 'property_details.html', {
+        'property': prop,
+        'images': images,
+        'form': form,
+    })
