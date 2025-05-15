@@ -1,0 +1,13 @@
+.card-img-top {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.overflow-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
