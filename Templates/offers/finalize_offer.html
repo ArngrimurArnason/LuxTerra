@@ -1,0 +1,18 @@
+{% extends 'Home/base.html' %}
+
+{% block content %}
+<div class="container my-5 text-center">
+  <h2>Finalize Offer</h2>
+  <p>You are about to finalize your offer for:</p>
+
+  <h4>{{ offer.property.address }}</h4>
+  <p><strong>Offer Price:</strong> {{ offer.offer_price|floatformat:0 }} kr.</p>
+  <p><strong>Status:</strong> {{ offer.status|title }}</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Confirm Finalization</button>
+    <a href="{% url 'offer_history' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

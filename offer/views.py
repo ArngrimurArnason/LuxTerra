@@ -6,6 +6,7 @@ from property.models import Property
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib import messages
+from datetime import timedelta
 
 @login_required
 def make_offer(request, property_id):
@@ -23,6 +24,7 @@ def make_offer(request, property_id):
             offer.user = request.user
             offer.property = property_obj
             offer.offer_date = timezone.now()
+            offer.offer_expiry_date = timezone.now() + timedelta(days=7)
             offer.save()
             return redirect('property_details', property_id=property_id)
     else:
@@ -32,18 +34,7 @@ def make_offer(request, property_id):
         'form': form,
         'property': property_obj
     })
-
-@login_required
-def user_offers(request):
-    offers = Offer.objects.filter(user=request.user)
-    return render(request, 'offers/user_offers.html', {'offers': offers})
-
-@login_required
-def property_offers(request, property_id):
-    property_obj = get_object_or_404(Property, pk=property_id)
-    if request.user != property_obj.user:
-        return redirect('home')  # optional permission check
-
-    offers = Offer.objects.filter(property=property_obj)
-    return render(request, 'offers/property_offers.html', {'offers': offers, 'property': property_obj})
+def finalize_offer(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id)
+    return render(request, 'offers/finalize_offer.html', {'offer': offer})
 
