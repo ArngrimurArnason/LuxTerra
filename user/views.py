@@ -10,6 +10,7 @@ from property.models import Property
 from django.contrib.auth.decorators import login_required
 from user.Forms.sign_up_form import SignUpForm
 from offer.models import Offer
+from django.utils import timezone
 
 
 # Create your views here.
@@ -23,8 +24,9 @@ def account_info(request, user_id):
     })
 
 def offer_history(request):
+    Offer.objects.filter(user=request.user, offer_expiry_date__lt=timezone.now()).delete()
     user_offers = Offer.objects.select_related('property', 'user').filter(user=request.user)
-    return render(request, 'offer_history.html', {'offers': user_offers})
+    return render(request, 'offers/offer_history.html', {'offers': user_offers})
 
 
 def edit_profile(request):
@@ -47,7 +49,7 @@ def edit_profile(request):
     return render(request, 'edit_profile.html', {'form': form})
 
 def incoming_offers(request):
-    return render(request, 'incoming_offers.html')
+    return render(request, 'offers/incoming_offers.html')
 
 
 
