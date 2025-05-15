@@ -64,6 +64,21 @@ def make_counter_offer(request, offer_id):
 
     return redirect('incoming_offers')
 
+def respond_to_counter_offer(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
+
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+
+        if new_status in ['accepted', 'rejected']:
+            offer.status = new_status
+            offer.save()
+            messages.success(request, f"You have {new_status} the counter-offer.")
+        else:
+            messages.error(request, "Invalid response.")
+
+    return redirect('offer_history')
+
 
 @require_POST
 def update_offer_status(request, offer_id):
