@@ -64,7 +64,7 @@ PROPERTY_TYPE_CHOICES = [
 class Property(models.Model):
     property_id = models.AutoField(primary_key=True)
     user = models.ForeignKey('user.User', on_delete=models.CASCADE)
-    admin_approval = models.BooleanField(default=False)
+    admin_approval = models.BooleanField(default=True)
     street =    models.CharField(max_length=100)
     house_number = models.IntegerField()
     location = models.CharField(max_length=100, choices=LOCATION_CHOICES)
