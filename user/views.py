@@ -10,6 +10,7 @@ from property.models import Property
 from django.contrib.auth.decorators import login_required
 from user.Forms.sign_up_form import SignUpForm
 from offer.models import Offer
+from django.utils import timezone
 
 
 # Create your views here.
@@ -23,6 +24,7 @@ def account_info(request):
     })
 
 def offer_history(request):
+    Offer.objects.filter(user=request.user, offer_expiry_date__lt=timezone.now()).delete()
     user_offers = Offer.objects.select_related('property', 'user').filter(user=request.user)
     return render(request, 'offers/offer_history.html', {'offers': user_offers})
 

@@ -30,11 +30,15 @@ def make_offer(request, property_id):
     else:
         form = OfferForm()
 
-    return render(request, 'offers/make_offer.html', {
+    return render(request, 'property_details.html', {
         'form': form,
         'property': property_obj
     })
 def finalize_offer(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id)
     return render(request, 'offers/finalize_offer.html', {'offer': offer})
+
+def incoming_offer(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id)
+    return render(request, 'offers/incoming_offers.html', {'offer': offer})
 
