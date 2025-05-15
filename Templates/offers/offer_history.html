@@ -46,12 +46,21 @@
 
       <!-- Respond to counter-offer if status is contingent -->
       {% if offer.status == 'contingent' %}
-      <form method="post" action="{% url 'respond_to_counter_offer' offer.offer_id %}" class="d-flex gap-2 mt-3">
+      <form method="post" action="{% url 'respond_to_counter_offer' offer.offer_id %}" class="d-flex flex-column gap-2 mt-3">
         {% csrf_token %}
-        <button type="submit" name="status" value="accepted" class="btn btn-success btn-sm">Accept Counter</button>
-        <button type="submit" name="status" value="rejected" class="btn btn-danger btn-sm">Reject</button>
+        <div class="d-flex gap-2">
+          <button type="submit" name="status" value="accepted" class="btn btn-success btn-sm">Accept Counter</button>
+          <button type="submit" name="status" value="rejected" class="btn btn-danger btn-sm">Reject</button>
+        </div>
       </form>
-      {% endif %}
+
+      <!-- 🔁 Counter again from buyer -->
+      <form method="post" action="{% url 'respond_to_counter_offer' offer.offer_id %}" class="d-flex align-items-center gap-2 mt-2">
+        {% csrf_token %}
+        <input type="number" name="counter_price" min="1" class="form-control form-control-sm" placeholder="Your Counter Offer" style="width: 140px;">
+        <button type="submit" name="status" value="pending" class="btn btn-warning btn-sm">Counter Again</button>
+      </form>
+    {% endif %}
     </div>
 
     <!-- Seller Info & Finalize -->

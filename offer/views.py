@@ -68,12 +68,26 @@ def respond_to_counter_offer(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
 
     if request.method == 'POST':
-        new_status = request.POST.get('status')
+        status = request.POST.get('status')
 
-        if new_status in ['accepted', 'rejected']:
-            offer.status = new_status
+        # If buyer is countering again
+        if status == 'pending':
+            try:
+                counter_price = int(request.POST.get('counter_price'))
+                if counter_price <= 0:
+                    raise ValueError("Invalid offer")
+
+                offer.offer_price = counter_price
+                offer.status = 'pending'  # back to seller to decide
+                offer.save()
+
+                messages.success(request, "Your counter offer has been sent.")
+            except (ValueError, TypeError):
+                messages.error(request, "Please enter a valid price.")
+        elif status in ['accepted', 'rejected']:
+            offer.status = status
             offer.save()
-            messages.success(request, f"You have {new_status} the counter-offer.")
+            messages.success(request, f"You have {status} the counter offer.")
         else:
             messages.error(request, "Invalid response.")
 
