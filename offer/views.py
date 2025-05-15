@@ -27,6 +27,7 @@ def make_offer(request, property_id):
             offer.offer_date = timezone.now()
             offer.offer_expiry_date = timezone.now() + timedelta(days=7)
             offer.save()
+            messages.success(request, 'Your offer has been submitted, check the status under offer history ')
             return redirect('property_details', property_id=property_id)
     else:
         form = OfferForm()
@@ -105,3 +106,85 @@ def update_offer_status(request, offer_id):
     else:
         messages.error(request, "Invalid status.")
     return redirect('incoming_offers')
+
+def finalize_offer(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
+
+    if request.method == 'POST':
+        # Delete both offer and associated property
+        property_obj = offer.property
+        offer.delete()
+        property_obj.delete()
+
+        messages.success(request, "Offer finalized and property removed.")
+        return redirect('offer_history')
+
+    return render(request, 'offers/finalize_offer.html', {'offer': offer})
+
+COUNTRIES = ["Iceland", "Norway", "Sweden", "Denmark", "Finland"]
+
+@login_required
+def finalize_step1(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
+
+    if request.method == 'POST':
+        # Save contact info to session
+        request.session['finalize_data'] = {
+            'street': request.POST.get('street'),
+            'city': request.POST.get('city'),
+            'postal_code': request.POST.get('postal_code'),
+            'country': request.POST.get('country'),
+            'kennitala': request.POST.get('kennitala')
+        }
+        return redirect('finalize_step2', offer_id=offer_id)
+
+    return render(request, 'offers/finalize_step1.html', {'offer': offer, 'countries': COUNTRIES})
+
+
+@login_required
+def finalize_step2(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
+    finalize_data = request.session.get('finalize_data', {})
+
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+        finalize_data['payment_method'] = payment_method
+
+        if payment_method == 'credit_card':
+            finalize_data['cardholder'] = request.POST.get('cardholder')
+            finalize_data['card_number'] = request.POST.get('card_number')
+            finalize_data['expiry_date'] = request.POST.get('expiry_date')
+            finalize_data['cvc'] = request.POST.get('cvc')
+        elif payment_method == 'bank_transfer':
+            finalize_data['iban'] = request.POST.get('iban')
+            finalize_data['swift'] = request.POST.get('swift')
+        elif payment_method == 'mortgage':
+            finalize_data['provider'] = request.POST.get('provider')
+
+        request.session['finalize_data'] = finalize_data
+        return redirect('finalize_step3', offer_id=offer_id)
+
+    return render(request, 'offers/finalize_step2.html', {'offer': offer})
+
+
+@login_required
+def finalize_step3(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
+    data = request.session.get('finalize_data', {})
+
+    if request.method == 'POST':
+        return redirect('finalize_step4', offer_id=offer_id)
+
+    return render(request, 'offers/finalize_step3.html', {'offer': offer, 'data': data})
+
+
+@login_required
+def finalize_step4(request, offer_id):
+    offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
+    data = request.session.pop('finalize_data', {})
+
+    property_obj = offer.property
+    offer.delete()
+    property_obj.delete()
+
+    return render(request, 'offers/finalize_step4.html', {'data': data})

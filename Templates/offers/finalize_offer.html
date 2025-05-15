@@ -1,18 +1,96 @@
 {% extends 'Home/base.html' %}
+{% load static %}
+{% block extra_head %}
+  <link href="{% static 'css/payment_options.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-<div class="container my-5 text-center">
-  <h2>Finalize Offer</h2>
-  <p>You are about to finalize your offer for:</p>
+<div class="container my-5">
+  <h2 class="text-center mb-4">Finalize Offer</h2>
+  <p class="text-center">You are about to finalize your offer for:</p>
 
-  <h4>{{ offer.property.address }}</h4>
-  <p><strong>Offer Price:</strong> {{ offer.offer_price|floatformat:0 }} kr.</p>
-  <p><strong>Status:</strong> {{ offer.status|title }}</p>
+  <div class="text-center mb-4">
+    <h4>{{ offer.property.street }} {{ offer.property.house_number }}, {{ offer.property.location }}</h4>
+    <p><strong>Offer Price:</strong> {{ offer.offer_price|floatformat:0 }} kr.</p>
+    <p><strong>Status:</strong> {{ offer.status|title }}</p>
+  </div>
 
   <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">Confirm Finalization</button>
-    <a href="{% url 'offer_history' %}" class="btn btn-secondary">Cancel</a>
+
+    <!-- Tab Headers -->
+    <div class="d-flex tab-header-container justify-content-center mb-3">
+      <div class="tab-header active-tab" data-target="credit-card-form">Credit card</div>
+      <div class="tab-header" data-target="mortgage-form">Mortgage</div>
+      <div class="tab-header" data-target="bank-transfer-form">Bank transfer</div>
+    </div>
+
+    <!-- Payment Forms -->
+    <div class="form-section">
+      <!-- Credit Card -->
+      <div id="credit-card-form" class="form-tab">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Cardholder Name</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Expiry Date</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label">Card Number</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">CVV</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- Mortgage -->
+      <div id="mortgage-form" class="form-tab d-none">
+        <div class="mb-3">
+          <label class="form-label">Mortgage holder name</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Mortgage amount</label>
+          <input type="number" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Term (years)</label>
+          <input type="number" class="form-control">
+        </div>
+      </div>
+
+      <!-- Bank Transfer -->
+      <div id="bank-transfer-form" class="form-tab d-none">
+        <div class="mb-3">
+          <label class="form-label">Account holder name</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">IBAN</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">SWIFT/BIC</label>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-success">Confirm Finalization</button>
+      <a href="{% url 'offer_history' %}" class="btn btn-secondary">Cancel</a>
+    </div>
   </form>
 </div>
+{% block extra_js %}
+  <script src="{% static 'js/finalize_offer.js' %}"></script>
+{% endblock %}
 {% endblock %}
