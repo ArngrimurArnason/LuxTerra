@@ -13,8 +13,8 @@ from offer.models import Offer
 
 
 # Create your views here.
-def account_info(request):
-    user = request.user
+def account_info(request, user_id):
+    user = get_object_or_404(User, user_id=user_id)
     properties = Property.objects.filter(user_id=user.user_id)
 
     return render(request, 'account_info.html', {

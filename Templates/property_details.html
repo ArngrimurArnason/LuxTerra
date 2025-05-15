@@ -62,7 +62,7 @@
           <div class="offer-box bg-light">
             <div class="d-flex align-items-center gap-2">
               <p class="mb-0">
-                <strong>Seller:</strong> <a href="{% url 'account_info' %}">{{ property.user.username }}</a>
+                <strong>Seller:</strong> <a href="{% url 'account_info' property.user.user_id %}">{{ property.user.username }}</a>
               </p>
                 <img src="{{ property.user.profile_img.url }}" alt="Seller profile" class="img-fluid rounded-circle" style="max-width: 60px; height: 60px; object-fit: cover;">
             </div>
