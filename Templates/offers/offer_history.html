@@ -10,12 +10,12 @@
 
   {% for offer in offers %}
   <div class="row mb-4 p-3 border-bottom align-items-center">
-    <!-- Image -->
+    <!-- Property Image -->
     <div class="col-md-3">
       <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="img-fluid rounded shadow-sm">
     </div>
 
-    <!-- Offer Details -->
+    <!-- Offer Info -->
     <div class="col-md-6">
       <h4 style="font-family: 'Bookman Old Style', serif;">
         {{ offer.property.street }} {{ offer.property.house_number }}, {{ offer.property.location }}
@@ -43,14 +43,23 @@
         <strong>Status:</strong>
         <span class="badge bg-light text-dark border">{{ offer.status|title }}</span>
       </p>
+
+      <!-- Respond to counter-offer if status is contingent -->
+      {% if offer.status == 'contingent' %}
+      <form method="post" action="{% url 'respond_to_counter_offer' offer.offer_id %}" class="d-flex gap-2 mt-3">
+        {% csrf_token %}
+        <button type="submit" name="status" value="accepted" class="btn btn-success btn-sm">Accept Counter</button>
+        <button type="submit" name="status" value="rejected" class="btn btn-danger btn-sm">Reject</button>
+      </form>
+      {% endif %}
     </div>
 
     <!-- Seller Info & Finalize -->
     <div class="col-md-3 text-end">
       <a href="{% url 'account_info' offer.property.user.user_id %}" class="seller-link">
-          <img src="{{ offer.property.user.profile_img.url }}" alt="Seller Profile Image" class="seller-profile-img-lg">
-          <span><strong>Seller:</strong> {{ offer.property.user.username }}</span>
-        </a>
+        <img src="{{ offer.property.user.profile_img.url }}" alt="Seller Profile Image" class="seller-profile-img-lg">
+        <span><strong>Seller:</strong> {{ offer.property.user.username }}</span>
+      </a>
 
       {% if offer.status == 'accepted' %}
       <form action="{% url 'finalize_offer' offer.offer_id %}" method="post" class="mt-3">
