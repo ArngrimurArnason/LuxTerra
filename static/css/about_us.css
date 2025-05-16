@@ -23,12 +23,7 @@ h2, h3 {
   color: #41563B;
   text-align: justify;
 }
-.img-fluid {
-  max-height: 200px;
-  object-fit: cover;
-  border: 4px solid #41563B;
-  border-radius: 0.5rem;
-}
+
 
 .owner-name {
   font-family: "Bookman Old Style", sans-serif !important;
@@ -41,9 +36,13 @@ h2, h3 {
   width: 100%;
   height: 350px;
   object-fit: cover;
-  border: 3px solid #41563B;
-  border-radius: 12px;
+  border-radius: 20px;
+  border: 4px solid #41563B;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+
+
 
 
 
