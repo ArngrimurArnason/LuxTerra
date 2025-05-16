@@ -13,7 +13,7 @@ from offer.forms.finalizestep1 import FinalizeStep1Form
 
 @login_required
 def make_offer(request, property_id):
-
+    '''Allows a user to make an offer on a property listing'''
     property_obj = get_object_or_404(Property, pk=property_id)
 
     if str(property_obj.user.pk) == str(request.user.pk):
@@ -34,17 +34,19 @@ def make_offer(request, property_id):
     else:
         form = OfferForm()
 
-    return render(request, 'property_details.html', {
+    return render(request, 'properties/property_details.html', {
         'form': form,
         'property': property_obj
     })
 
 def incoming_offer(request, offer_id):
+    '''Displays the details of an incoming offer'''
     offer = get_object_or_404(Offer, pk=offer_id)
     return render(request, 'offers/incoming_offers.html', {'offer': offer})
 
 
 def make_counter_offer(request, offer_id):
+    ''' Allows the property owner to make a counter offer'''
     offer = get_object_or_404(Offer, pk=offer_id, property__user=request.user)
 
     if request.method == 'POST':
@@ -53,7 +55,6 @@ def make_counter_offer(request, offer_id):
             if counter_price <= 0:
                 raise ValueError("Invalid price")
 
-            # Set the new counter offer and mark as contingent
             offer.offer_price = counter_price
             offer.status = 'contingent'
             offer.save()
@@ -65,12 +66,12 @@ def make_counter_offer(request, offer_id):
     return redirect('incoming_offers')
 
 def respond_to_counter_offer(request, offer_id):
+    '''Allows the buyer to respond to a counter offer.'''
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
 
     if request.method == 'POST':
         status = request.POST.get('status')
 
-        # If buyer is countering again
         if status == 'pending':
             try:
                 counter_price = int(request.POST.get('counter_price'))
@@ -78,7 +79,7 @@ def respond_to_counter_offer(request, offer_id):
                     raise ValueError("Invalid offer")
 
                 offer.offer_price = counter_price
-                offer.status = 'pending'  # back to seller to decide
+                offer.status = 'pending'
                 offer.save()
 
                 messages.success(request, "Your counter offer has been sent.")
@@ -96,6 +97,7 @@ def respond_to_counter_offer(request, offer_id):
 
 @require_POST
 def update_offer_status(request, offer_id):
+    '''Updates the status of an offer (e.g., accepted, rejected, contingent)'''
     offer = get_object_or_404(Offer, pk=offer_id, property__user=request.user)
     new_status = request.POST.get('status')
     if new_status in ['accepted', 'rejected', 'contingent']:
@@ -109,8 +111,8 @@ def update_offer_status(request, offer_id):
 
 COUNTRIES = ["Iceland", "Norway", "Sweden", "Denmark", "Finland"]
 
-@login_required
 def finalize_step1(request, offer_id):
+    '''Step 1 of the finalization process for a property sale.'''
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
     session_data = request.session.get('finalize_data', {})
 
@@ -132,8 +134,8 @@ def finalize_step1(request, offer_id):
     })
 
 
-@login_required
 def finalize_step2(request, offer_id):
+    '''Step 2 of the finalization process for a property sale.'''
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
     session_data = request.session.get('finalize_data', {})
 
@@ -153,8 +155,8 @@ def finalize_step2(request, offer_id):
         'step_number': 2
     })
 
-@login_required
 def finalize_step3(request, offer_id):
+    '''Step 3 of the finalization process for a property sale.'''
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
     data = request.session.get('finalize_data', {})
 
@@ -171,8 +173,8 @@ def finalize_step3(request, offer_id):
     return render(request, 'offers/finalize_step3.html', {'offer': offer, 'data': data, 'step_number': 3, 'method_label': method_label})
 
 
-@login_required
 def finalize_step4(request, offer_id):
+    '''Step 4 of the finalization process for a property sale.'''
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
     data = request.session.pop('finalize_data', {})
 

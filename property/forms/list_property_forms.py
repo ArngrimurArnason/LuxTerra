@@ -30,49 +30,64 @@ class ListPropertyForm(ModelForm):
             'thumbnail': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
+    def clean_thumbnail(self):
+        '''Ensure thumbnail is provided'''
+        thumbnail = self.cleaned_data.get('thumbnail')
+        if not thumbnail:
+            raise ValidationError("Thumbnail is required.")
+        return thumbnail
+
     def clean_street(self):
+        '''Validate street input'''
         street = self.cleaned_data.get('street')
         if not street or len(street) < 2:
             raise ValidationError("Street name is too short.")
         return street
 
     def clean_house_number(self):
+        '''Validate house number input'''
         number = self.cleaned_data.get('house_number')
         if number <= 0:
             raise ValidationError("House number must be positive.")
         return number
 
     def clean_location(self):
+        '''Validate location input'''
         loc = self.cleaned_data.get('location')
         if not loc:
             raise ValidationError("Location is required.")
         return loc
 
     def clean_price(self):
+        '''Validate price input'''
         price = self.cleaned_data.get('price')
         if price <= 0:
             raise ValidationError("Price must be greater than zero.")
         return price
 
     def clean_description(self):
+        '''Validate description input'''
         desc = self.cleaned_data.get('description')
         if len(desc.strip()) < 20:
             raise ValidationError("Description must be at least 20 characters.")
         return desc
 
     def clean_bathroom(self):
+        '''Validate bathroom input'''
         val = self.cleaned_data.get('bathroom')
         if val < 0:
             raise ValidationError("Number of bathrooms cannot be negative.")
         return val
 
     def clean_bedrooms(self):
+        '''Validate bedrooms input'''
         val = self.cleaned_data.get('bedrooms')
         if val < 0:
             raise ValidationError("Number of bedrooms cannot be negative.")
         return val
 
     def clean_size(self):
+        '''Validate size input'''
         size = self.cleaned_data.get('size')
         if size <= 0:
             raise ValidationError("Size must be greater than zero.")

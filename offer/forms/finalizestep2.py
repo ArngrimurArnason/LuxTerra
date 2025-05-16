@@ -18,14 +18,12 @@ class FinalizeStep2Form(forms.Form):
     MONTH_CHOICES = [(f"{i:02}", f"{i:02}") for i in range(1, 13)]
     YEAR_CHOICES = [(str(i), f"20{i}") for i in range(25, 36)]
 
-    # Credit card fields
     cardholder = forms.CharField(required=False)
     card_number = forms.CharField(required=False)
     expiry_month = forms.ChoiceField(choices=MONTH_CHOICES, required=False)
     expiry_year = forms.ChoiceField(choices=YEAR_CHOICES, required=False)
     cvc = forms.CharField(required=False)
 
-    # Mortgage fields
     PROVIDER_CHOICES = [
         ("", "-- Select Bank --"),
         ("Arion Banki", "Arion Banki"),
@@ -41,24 +39,28 @@ class FinalizeStep2Form(forms.Form):
     )
 
     def clean_cardholder(self):
+        '''Validate cardholder input'''
         name = self.cleaned_data.get('cardholder', '').strip()
         if name and not all(part.isalpha() for part in name.split()):
             raise ValidationError("Cardholder name must contain only letters.")
         return name
 
     def clean_card_number(self):
+        '''Validate card_number input'''
         number = self.cleaned_data.get('card_number', '')
         if number and not re.fullmatch(r'(\d{4}-){3}\d{4}', number):
             raise ValidationError("Card number must be in the format 1111-2222-3333-4444.")
         return number
 
     def clean_cvc(self):
+        '''Validate cvc input'''
         cvc = self.cleaned_data.get('cvc', '')
         if cvc and not re.fullmatch(r'\d{3}', cvc):
             raise ValidationError("CVC must be exactly 3 digits.")
         return cvc
 
     def clean(self):
+        '''Validate payment_method input'''
         cleaned = super().clean()
         method = cleaned.get('payment_method')
 
@@ -68,7 +70,6 @@ class FinalizeStep2Form(forms.Form):
                 if not cleaned.get(field):
                     self.add_error(field, 'This field is required.')
 
-            # Validate expiry date is in the future
             month = cleaned.get('expiry_month')
             year = cleaned.get('expiry_year')
 

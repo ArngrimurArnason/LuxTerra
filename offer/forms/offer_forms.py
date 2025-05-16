@@ -7,6 +7,7 @@ class OfferForm(forms.ModelForm):
         fields = ['offer_price']
 
     def clean_offer_price(self):
+        '''Validate the offer price'''
         price = self.cleaned_data.get('offer_price')
         if price is None or price <= 0:
             raise forms.ValidationError("Offer price must be greater than zero.")

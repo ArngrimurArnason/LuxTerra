@@ -28,6 +28,7 @@ class SignUpForm(ModelForm):
         }
 
     def clean_national_id(self):
+        '''Validate national id input'''
         nid = self.cleaned_data.get('national_id')
         if not nid.isdigit():
             raise ValidationError("SSN must contain only digits.")
@@ -36,6 +37,7 @@ class SignUpForm(ModelForm):
         return nid
 
     def clean_username(self):
+        '''Validate username input'''
         username = self.cleaned_data.get('username')
         if ' ' in username:
             raise ValidationError("Username must not contain spaces.")
@@ -46,18 +48,21 @@ class SignUpForm(ModelForm):
         return username
 
     def clean_email(self):
+        '''Validate email input'''
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
             raise ValidationError("Email already in use.")
         return email
 
     def clean_address(self):
+        '''Validate address input'''
         address = self.cleaned_data.get('address')
         if address and len(address) > 30:
             raise ValidationError("Address too long.")
         return address
 
     def clean(self):
+        '''Validate password input'''
         cleaned_data = super().clean()
         pw1 = cleaned_data.get('password')
         pw2 = cleaned_data.get('confirm_password')

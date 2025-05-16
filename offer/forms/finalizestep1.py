@@ -5,7 +5,6 @@ import re
 COUNTRIES = [
     ('IS', 'Iceland'),
     ('US', 'United States'),
-    # Add more as needed
 ]
 
 
@@ -14,30 +13,29 @@ class FinalizeStep1Form(forms.Form):
     city = forms.CharField(max_length=100, required=True)
     postal_code = forms.CharField(max_length=20, required=True)
     country = forms.ChoiceField(choices=COUNTRIES, required=True)
-    kennitala = forms.CharField(max_length=10, min_length=10, required=True)
+    SSN = forms.CharField(max_length=10, min_length=10, required=True)
 
-    def clean_kennitala(self):
-        value = self.cleaned_data['kennitala']
+    def clean_SSN(self):
+        '''Validate SSN input'''
+        value = self.cleaned_data['SSN']
         if not value.isdigit():
-            raise ValidationError("Kennitala must contain only digits.")
+            raise ValidationError("SSN must contain only digits.")
         if len(value) != 10:
-            raise ValidationError("Kennitala must be exactly 10 digits.")
+            raise ValidationError("SSN must be exactly 10 digits.")
         return value
 
     def clean_street(self):
+        '''Validate street input'''
         value = self.cleaned_data.get('street', '').strip()
 
-        # Reject special characters
         if re.search(r'[!"#]', value):
             raise ValidationError("Street address must not contain special characters like !\"#.")
 
-        # Reject if only numbers
         if re.fullmatch(r'\d+', value):
             raise ValidationError("Street address cannot be just numbers.")
 
         parts = value.split()
 
-        # Require at least one word and one number
         has_text = any(part.isalpha() for part in parts)
         has_number = any(part.isdigit() for part in parts)
 
@@ -47,6 +45,7 @@ class FinalizeStep1Form(forms.Form):
         return value
 
     def clean_postal_code(self):
+        '''Validate postal code input'''
         value = self.cleaned_data['postal_code']
         if not value.isdigit():
             raise ValidationError("Postal code must contain only digits.")
@@ -55,6 +54,7 @@ class FinalizeStep1Form(forms.Form):
         return value
 
     def clean_city(self):
+        '''Validate city input'''
         value = self.cleaned_data['city'].strip()
         if not value.isalpha():
             raise ValidationError("City must contain only letters.")
