@@ -1,0 +1,28 @@
+/* incoming_offers.css */
+
+.property-thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.seller-profile-img-lg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.seller-link {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-weight: 500;
+}
+
+form .btn {
+  width: 100%;
+}
