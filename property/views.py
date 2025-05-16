@@ -104,31 +104,34 @@ def properties_view(request):
 @login_required(login_url='login')
 def list_property(request):
     '''Allows logged-in users to list a new property for sale'''
+
     if request.method == "POST":
         form = ListPropertyForm(request.POST, request.FILES)
-        image_files = request.FILES.getlist('images')  # handle multi-images
+        image_files = request.FILES.getlist('images')
 
-        if form.is_valid():
-            property = form.save(commit=False)
-            property.user = request.user
-            property.save()  # Save the main property
+        no_images_uploaded = not image_files
+        thumbnail_missing = not request.FILES.get('thumbnail')
 
-            # Save each uploaded image to PropertyImages
+        if form.is_valid() and not no_images_uploaded:
+            property_instance = form.save(commit=False)
+            property_instance.user = request.user
+            property_instance.save()
+
             for image in image_files:
-                PropertyImages.objects.create(property=property, image=image)
+                PropertyImages.objects.create(property=property_instance, image=image)
 
-            messages.success(request, 'Listing published to properties, you can view it under my profile.')
-            # Don't redirect — just re-render the same page with an empty form
-            form = ListPropertyForm()
-            return render(request, 'properties/list_property.html', {'form': form})
-        else:
-            messages.error(request, 'Please correct the errors below.')
+            messages.success(request, 'Listing published to properties. You can view it under your profile.')
+            return redirect('list_property')
+
+        if no_images_uploaded:
+            messages.error(request, 'Please upload at least one photo.')
+        if not form.is_valid():
+            messages.error(request, 'Please correct the errors in the form.')
+
     else:
         form = ListPropertyForm()
 
     return render(request, 'properties/list_property.html', {'form': form})
-
-
 
 
 def property_details(request, property_id):
