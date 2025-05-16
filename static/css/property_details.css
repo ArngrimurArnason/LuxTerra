@@ -21,7 +21,6 @@ body {
     background-repeat: no-repeat;
 }
 
-/* Date badge */
 .date-badge {
     position: absolute;
     top: 10px;
@@ -34,7 +33,6 @@ body {
     border-radius: 5px;
 }
 
-/* Property Title & Price */
 .property-header {
     border-bottom: 2px solid #ccc;
     padding-bottom: 15px;
@@ -78,7 +76,6 @@ body {
     color: #3e5139;
 }
 
-/* Offer form */
 .offer-box {
     border: 1px solid #3e5139;
     padding: 20px;
@@ -144,7 +141,6 @@ body {
 }
 
 
-/* Responsive tweaks */
 @media (max-width: 768px) {
       .property-title {
         font-size: 28px;

@@ -8,7 +8,6 @@
 
 <div class="container my-4">
 
-  <!-- Carousel -->
         <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             {% for image in images %}
@@ -35,14 +34,12 @@
             </div>
           </div>
 
-  <!-- Title + Price -->
         <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap">
           <h2 class="property-title">{{ property.street }} {{ property.house_number }}, {{ property.location }}</h2>
           <h3 class="property-price">{{ property.price|floatformat:0 }} kr.</h3>
         </div>
 
 
-      <!-- Icons -->
         <div class="d-flex flex-wrap align-items-center gap-4 fs-2 mt-3">
           <span><span class="bathroom-detail"></span> {{ property.bathroom }}</span>
           <span><span class="room-detail"></span> {{ property.bedrooms }}</span>

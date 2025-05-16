@@ -6,7 +6,7 @@ a.dropdown-toggle::after {
     border: none;
 }
 .dropdown-item {
-    color: #e8e6b7 !important; /* White text */
+    color: #e8e6b7 !important;
     font-weight: 500;
     padding: 0.5rem 1rem;
 }
@@ -48,7 +48,6 @@ a.dropdown-toggle::after {
   position: relative;
 }
 
-/* Create hover underline effect */
 .ms-auto.d-flex .nav-link:hover {
   text-decoration: underline;
 }

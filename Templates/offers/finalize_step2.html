@@ -36,7 +36,6 @@
       <div class="text-danger small">{{ form.payment_method.errors }}</div>
     </div>
 
-    <!-- Credit Card Fields -->
     <div id="credit_card_fields">
       <div class="mb-2">
         {{ form.cardholder.label_tag }}
@@ -66,7 +65,6 @@
         <div class="text-danger small">{{ form.cvc.errors }}</div>
       </div>
     </div>
-    <!-- Bank Transfer Fields -->
     <div id="bank_transfer_fields" style="display: none;">
       <div class="alert alert-info mb-3">
         <strong>Please transfer to this account and fill in the information below:</strong>
@@ -90,7 +88,6 @@
       </div>
     </div>
 
-    <!-- Mortgage Fields -->
     <div id="mortgage_fields" style="display: none;">
       <div class="mb-2">
         {{ form.provider.label_tag }}

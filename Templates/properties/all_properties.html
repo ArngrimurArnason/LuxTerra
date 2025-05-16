@@ -113,13 +113,11 @@
                   </div>
             </div>
             <div class="card-body">
-                <!-- Street + Location in same row -->
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="property-street mb-0">{{ p.street }} {{ p.house_number }}</h3>
                     <p class="text-muted mb-0">{{ p.location }}</p>
                 </div>
                 <div class="text-muted small mb-1">Listed On: {{ p.listing_date|date:"F j, Y" }}</div>
-                <!-- One divider above icons -->
                 <hr class="my-2">
 
                 <div class="property-details">
@@ -128,7 +126,6 @@
                     <div class="bathroom-detail">{{ p.bathroom }}</div>
                 </div>
 
-                <!-- No extra <hr> here -->
                 <div class="property-price">{{ p.price }} kr</div>
             </div>
         </a>

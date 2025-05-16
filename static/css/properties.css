@@ -5,7 +5,6 @@
     font-family: "Times New Roman", serif;
 }
 
-/* Filter Container */
 .filter-container {
     display: flex;
     justify-content: center;
@@ -13,7 +12,6 @@
     padding: 1rem;
 }
 
-/* Filters Styling */
 .filters {
     display: flex;
     gap: 1.5rem;
@@ -22,7 +20,6 @@
     justify-content: center;
 }
 
-/* Individual Filter Label */
 .filters label {
     font-family: "Times New Roman", serif;
     font-size: 1rem;
@@ -33,11 +30,10 @@
     text-align: left;
 }
 
-/* Custom Select and Input Styles */
 .custom-select,
 .custom-input {
-    border-radius: 20px; /* Rounded edges */
-    border: 2px solid #41563B; /* Green border */
+    border-radius: 20px;
+    border: 2px solid #41563B;
     height: 40px;
     box-sizing: border-box;
     padding: 0 12px;
@@ -46,19 +42,17 @@
     width: 180px;
     background-color: #fff;
     color: #41563B;
-    appearance: none; /* removes default dropdown style */
+    appearance: none;
     background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%2341563B" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10"/></svg>');
     background-repeat: no-repeat;
     background-position: right 12px top 50%;
     background-size: 10px;
 }
 
-/* Input without dropdown arrow */
 .custom-input {
     background-image: none;
 }
 
-/* Search Button Style */
 .search-button {
     height: 40px;
     width: 40px;
@@ -72,14 +66,12 @@
     justify-content: center;
 }
 
-/* Placeholder color adjustment */
 ::placeholder {
     color: #41563B;
     opacity: 0.7;
 }
 
 
-/* Property Container */
 .property-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -88,7 +80,6 @@
     margin: 2rem auto;
 }
 
-/* Responsive layout */
 @media (max-width: 992px) {
     .property-container {
         grid-template-columns: repeat(2, 1fr);
@@ -101,7 +92,6 @@
     }
 }
 
-/* Card Design */
 .card.prop {
     border-radius: 12px;
     overflow: hidden;
@@ -125,7 +115,6 @@
     height: 100%;
 }
 
-/* Property Image with Overlay Label */
 .property-image {
     height: 220px;
     background-size: cover;
@@ -144,7 +133,6 @@
     font-size: 0.85rem;
 }
 
-/* Card body details */
 .card-body {
     padding: 0.8rem;
     display: flex;
@@ -153,7 +141,6 @@
     flex-grow: 1;
 }
 
-/* Property details with clear layout */
 .property-details {
     display: flex;
     justify-content: space-around;
@@ -179,7 +166,6 @@
     font-size: 1.4rem;
 }
 
-/* Property Price Emphasis */
 .property-price {
     text-align: center;
     font-size: 1.4rem;
@@ -188,7 +174,6 @@
     color: #2c2c2c;
 }
 
-/* Add bathroom icon explicitly */
 .bathroom-detail {
     display: flex;
     align-items: center;

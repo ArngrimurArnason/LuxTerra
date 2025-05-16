@@ -10,12 +10,10 @@
 
   {% for offer in offers %}
   <div class="row mb-4 p-3 border-bottom align-items-center">
-    <!-- Property Image -->
     <div class="col-md-3">
       <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="img-fluid rounded shadow-sm">
     </div>
 
-    <!-- Offer Info -->
     <div class="col-md-6">
       <h4 style="font-family: 'Bookman Old Style', serif;">
         {{ offer.property.street }} {{ offer.property.house_number }}, {{ offer.property.location }}
@@ -44,7 +42,6 @@
         <span class="badge bg-light text-dark border">{{ offer.status|title }}</span>
       </p>
 
-      <!-- Respond to counter-offer if status is contingent -->
       {% if offer.status == 'contingent' %}
       <form method="post" action="{% url 'respond_to_counter_offer' offer.offer_id %}" class="d-flex flex-column gap-2 mt-3">
         {% csrf_token %}
@@ -54,7 +51,6 @@
         </div>
       </form>
 
-      <!-- 🔁 Counter again from buyer -->
       <form method="post" action="{% url 'respond_to_counter_offer' offer.offer_id %}" class="d-flex align-items-center gap-2 mt-2">
         {% csrf_token %}
         <input type="number" name="counter_price" min="1" class="form-control form-control-sm" placeholder="Your Counter Offer" style="width: 140px;">
@@ -63,10 +59,9 @@
     {% endif %}
     </div>
 
-    <!-- Seller Info & Finalize -->
     <div class="col-md-3 text-end">
       <a href="{% url 'account_info' offer.property.user.user_id %}" class="seller-link">
-        <img src="{{ offer.property.user.profile_img.url }}" alt="Seller Profile Image" class="seller-profile-img-lg">
+        <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="property-thumbnail">
         <span><strong>Seller:</strong> {{ offer.property.user.username }}</span>
       </a>
 
