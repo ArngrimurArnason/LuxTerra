@@ -47,7 +47,7 @@ def edit_profile(request):
                 update_session_auth_hash(request, user)
             user.save()
             messages.success(request, "Profile updated.")
-            return redirect('account_info')
+            return redirect('account_info',  user_id=user.user_id)
     else:
         form = EditProfileForm(instance=user)
 
