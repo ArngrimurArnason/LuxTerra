@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.contrib import messages
 from datetime import timedelta
 from django.views.decorators.http import require_POST
+from offer.forms.finalizestep2 import FinalizeStep2Form
+from offer.forms.finalizestep1 import FinalizeStep1Form
 
 @login_required
 def make_offer(request, property_id):
@@ -110,22 +112,22 @@ COUNTRIES = ["Iceland", "Norway", "Sweden", "Denmark", "Finland"]
 @login_required
 def finalize_step1(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
-    data = request.session.get('finalize_data', {})
+    session_data = request.session.get('finalize_data', {})
 
     if request.method == 'POST':
-        request.session['finalize_data'] = {
-            'street': request.POST.get('street'),
-            'city': request.POST.get('city'),
-            'postal_code': request.POST.get('postal_code'),
-            'country': request.POST.get('country'),
-            'kennitala': request.POST.get('kennitala')
-        }
-        return redirect('finalize_step2', offer_id=offer_id)
+        form = FinalizeStep1Form(request.POST)
+        if form.is_valid():
+            request.session['finalize_data'] = form.cleaned_data
+            messages.success(request, "Your finalized step has been sent.")
+            return redirect('finalize_step2', offer_id=offer_id)
+    else:
+        messages.error(request, "Please enter a valid finalize step.")
+        form = FinalizeStep1Form(initial=session_data)
 
     return render(request, 'offers/finalize_step1.html', {
         'offer': offer,
+        'form': form,
         'countries': COUNTRIES,
-        'data': data,
         'step_number': 1
     })
 
@@ -133,41 +135,40 @@ def finalize_step1(request, offer_id):
 @login_required
 def finalize_step2(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
-    finalize_data = request.session.get('finalize_data', {})
+    session_data = request.session.get('finalize_data', {})
 
     if request.method == 'POST':
-        payment_method = request.POST.get('payment_method')
-        finalize_data['payment_method'] = payment_method
-
-        if payment_method == 'credit_card':
-            finalize_data['cardholder'] = request.POST.get('cardholder')
-            finalize_data['card_number'] = request.POST.get('card_number')
-            finalize_data['expiry_date'] = request.POST.get('expiry_date')
-            finalize_data['cvc'] = request.POST.get('cvc')
-        elif payment_method == 'bank_transfer':
-            finalize_data['iban'] = request.POST.get('iban')
-            finalize_data['swift'] = request.POST.get('swift')
-        elif payment_method == 'mortgage':
-            finalize_data['provider'] = request.POST.get('provider')
-
-        request.session['finalize_data'] = finalize_data
-        return redirect('finalize_step3', offer_id=offer_id)
+        form = FinalizeStep2Form(request.POST)
+        if form.is_valid():
+            session_data.update(form.cleaned_data)
+            request.session['finalize_data'] = session_data
+            return redirect('finalize_step3', offer_id=offer_id)
+    else:
+        form = FinalizeStep2Form(initial=session_data)
 
     return render(request, 'offers/finalize_step2.html', {
         'offer': offer,
-        'data': finalize_data,
-        'step_number': 2})
-
+        'form': form,
+        'data': session_data,
+        'step_number': 2
+    })
 
 @login_required
 def finalize_step3(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
     data = request.session.get('finalize_data', {})
 
+    payment_method_map = {
+        "credit_card": "Credit Card",
+        "bank_transfer": "Bank Transfer",
+        "mortgage": "Mortgage"
+    }
+    method_label = payment_method_map.get(data.get("payment_method"), data.get("payment_method"))
+
     if request.method == 'POST':
         return redirect('finalize_step4', offer_id=offer_id)
 
-    return render(request, 'offers/finalize_step3.html', {'offer': offer, 'data': data, 'step_number': 3})
+    return render(request, 'offers/finalize_step3.html', {'offer': offer, 'data': data, 'step_number': 3, 'method_label': method_label})
 
 
 @login_required
@@ -176,7 +177,19 @@ def finalize_step4(request, offer_id):
     data = request.session.pop('finalize_data', {})
 
     property_obj = offer.property
+
+    if property_obj.thumbnail:
+        property_obj.thumbnail.delete(save=False)
+
+    for img in property_obj.images.all():
+        if img.image:
+            img.image.delete(save=False)
+        img.delete()
+
     offer.delete()
     property_obj.delete()
 
-    return render(request, 'offers/finalize_step4.html', {'data': data, 'step_number': 4})
+    return render(request, 'offers/finalize_step4.html', {
+        'data': data,
+        'step_number': 4
+    })
