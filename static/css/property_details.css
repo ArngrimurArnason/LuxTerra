@@ -166,7 +166,7 @@ body {
   }
 }
 .bathroom-detail, .room-detail, .type-detail, .age-detail, .size-detail {
-      display: inline-block;
+    display: inline-block;
     vertical-align: center;
     width: 35px;
     height: 35px;

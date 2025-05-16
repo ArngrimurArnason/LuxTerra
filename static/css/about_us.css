@@ -24,7 +24,7 @@ h2, h3 {
   text-align: justify;
 }
 .img-fluid {
-  max-height: 300px;
+  max-height: 200px;
   object-fit: cover;
   border: 4px solid #41563B;
   border-radius: 0.5rem;
@@ -38,10 +38,12 @@ h2, h3 {
 }
 
 .owner-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
   border: 3px solid #41563B;
   border-radius: 12px;
-  max-height: 350px;
-  object-fit: cover;
 }
+
 
 
