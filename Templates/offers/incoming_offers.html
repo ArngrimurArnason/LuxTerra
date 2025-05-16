@@ -1,7 +1,7 @@
 {% extends 'Home/base.html' %}
 {% load static %}
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/offer_history.css' %}">
+  <link rel="stylesheet" href="{% static 'css/incoming_offers.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,7 @@
   <!-- 📦 Offer Content Block -->
   <div class="row mb-4 p-3 border-bottom align-items-center">
     <div class="col-md-3">
-      <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="img-fluid rounded shadow-sm">
+        <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="property-thumbnail">
     </div>
 
     <div class="col-md-6">
