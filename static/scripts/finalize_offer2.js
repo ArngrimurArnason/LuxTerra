@@ -1,20 +1,31 @@
- document.addEventListener("DOMContentLoaded", function () {
-    const methodSelect = document.getElementById('method-select');
-    const creditFields = document.getElementById('credit_card_fields');
-    const bankFields = document.getElementById('bank_transfer_fields');
-    const mortgageFields = document.getElementById('mortgage_fields');
+document.addEventListener('DOMContentLoaded', function () {
+  const methodSelect = document.getElementById('method-select');
 
-    function toggleFields(method) {
-      creditFields.style.display = method === 'credit_card' ? 'block' : 'none';
-      bankFields.style.display = method === 'bank_transfer' ? 'block' : 'none';
-      mortgageFields.style.display = method === 'mortgage' ? 'block' : 'none';
+  const creditCardFields = document.getElementById('credit_card_fields');
+  const bankTransferFields = document.getElementById('bank_transfer_fields');
+  const mortgageFields = document.getElementById('mortgage_fields');
+
+  function toggleFields() {
+    const method = methodSelect.value;
+
+    // Hide all first
+    creditCardFields.style.display = 'none';
+    bankTransferFields.style.display = 'none';
+    mortgageFields.style.display = 'none';
+
+    // Show only the selected
+    if (method === 'credit_card') {
+      creditCardFields.style.display = 'block';
+    } else if (method === 'bank_transfer') {
+      bankTransferFields.style.display = 'block';
+    } else if (method === 'mortgage') {
+      mortgageFields.style.display = 'block';
     }
+  }
 
-    // Set initial state
-    toggleFields(methodSelect.value);
+  // Initial state
+  toggleFields();
 
-    // Change on select
-    methodSelect.addEventListener('change', () => {
-      toggleFields(methodSelect.value);
-    });
-  });
+  // On change
+  methodSelect.addEventListener('change', toggleFields);
+});

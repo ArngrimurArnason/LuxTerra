@@ -31,7 +31,7 @@
         <ul>
           <li>Address: {{ data.street }}, {{ data.city }}, {{ data.postal_code }}, {{ data.country }}</li>
           <li>Kennitala: {{ data.kennitala }}</li>
-          <li>Payment Method: {{ data.payment_method|title }}</li>
+          <li>Payment Method: {{ method_label }}</li>
           {% if data.payment_method == 'credit_card' %}
             <li>Cardholder: {{ data.cardholder }}</li>
           {% elif data.payment_method == 'bank_transfer' %}
@@ -42,8 +42,10 @@
         </ul>
         <form method="post">
           {% csrf_token %}
-          <button type="submit" class="btn btn-success">Confirm</button>
-            <a href="{% url 'finalize_step2' offer.offer_id %}" class="btn btn-secondary mt-3">← Back</a>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <a href="{% url 'finalize_step2' offer.offer_id %}" class="btn btn-secondary">← Back</a>
+            <button type="submit" class="btn btn-success">Confirm</button>
+          </div>
         </form>
     </div>
 {%  endblock %}
