@@ -1,11 +1,11 @@
 {% extends 'Home/base.html' %}
-{% block content %}
+
 {% load static %}
-<head>
-
+{% block extra_head %}
     <link href="{% static 'css/log_in.css' %}" rel="stylesheet">
-</head>
+{% endblock %}
 
+{% block content %}
 <h2 id="h2">The best deals start with a click — log in today, and unlock the door to your dream property!<br>-LuxTerra</h2>
 <div class="d-flex justify-content-center align-items-center">
   <div class="container py-3">
