@@ -30,7 +30,7 @@
             <h3>Review Your Information</h3>
         <ul>
           <li>Address: {{ data.street }}, {{ data.city }}, {{ data.postal_code }}, {{ data.country }}</li>
-          <li>Kennitala: {{ data.kennitala }}</li>
+          <li>SSN: {{ data.SSN }}</li>
           <li>Payment Method: {{ method_label }}</li>
           {% if data.payment_method == 'credit_card' %}
             <li>Cardholder: {{ data.cardholder }}</li>
