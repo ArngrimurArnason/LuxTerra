@@ -25,11 +25,6 @@ class FinalizeStep2Form(forms.Form):
     expiry_year = forms.ChoiceField(choices=YEAR_CHOICES, required=False)
     cvc = forms.CharField(required=False)
 
-    # Bank transfer fields
-    bank_number = forms.CharField(required=False)
-    branch_number = forms.CharField(required=False)
-    account_number = forms.CharField(required=False)
-
     # Mortgage fields
     PROVIDER_CHOICES = [
         ("", "-- Select Bank --"),
@@ -86,13 +81,9 @@ class FinalizeStep2Form(forms.Form):
                 except ValueError:
                     self.add_error('expiry_year', 'Invalid expiry date.')
 
+
         elif method == 'bank_transfer':
-            if not re.fullmatch(r'\d{4}', cleaned.get('bank_number') or ''):
-                self.add_error('bank_number', 'Bank number must be 4 digits.')
-            if not re.fullmatch(r'\d{2}', cleaned.get('branch_number') or ''):
-                self.add_error('branch_number', 'Branch number must be 2 digits.')
-            if not re.fullmatch(r'\d{6}', cleaned.get('account_number') or ''):
-                self.add_error('account_number', 'Account number must be 6 digits.')
+            pass
 
         elif method == 'mortgage':
             if not cleaned.get('provider'):
