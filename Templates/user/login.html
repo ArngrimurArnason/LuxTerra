@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block content %}
-<h2 id="h2">The best deals start with a click — log in today, and unlock the door to your dream property!<br>-LuxTerra</h2>
+<h2 id="h2" class="heading mt-5">The best deals start with a click — log in today, and unlock the door to your dream property!<br>-LuxTerra</h2>
 <div class="d-flex justify-content-center align-items-center">
   <div class="container py-3">
     <div class="row justify-content-center">
       <div class="col-md-6 col-lg-5">
-          <div class="login-box p-4 rounded shadow bg-white">
+          <div class="login-box p-4 rounded shadow">
         <form method="post" action="{% url 'login' %} ">
             {% csrf_token %}
           <div class="mb-3 row align-items-center">
