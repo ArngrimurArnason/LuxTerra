@@ -11,7 +11,7 @@
   {% for offer in offers %}
   <div class="row mb-4 p-3 border-bottom align-items-center">
     <div class="col-md-3">
-      <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="img-fluid rounded shadow-sm">
+      <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="property-fixed-img rounded shadow-sm">
     </div>
 
     <div class="col-md-6">
@@ -61,7 +61,7 @@
 
     <div class="col-md-3 text-end">
       <a href="{% url 'account_info' offer.property.user.user_id %}" class="seller-link">
-        <img src="{{ offer.property.thumbnail.url }}" alt="Property Image" class="property-thumbnail">
+        <img src="{{ offer.property.user.profile_img.url }}" alt="Seller Profile Image" class="seller-profile-img-lg">
         <span><strong>Seller:</strong> {{ offer.property.user.username }}</span>
       </a>
 
