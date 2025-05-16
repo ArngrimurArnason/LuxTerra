@@ -120,10 +120,9 @@ def finalize_step1(request, offer_id):
         form = FinalizeStep1Form(request.POST)
         if form.is_valid():
             request.session['finalize_data'] = form.cleaned_data
-            messages.success(request, "Your finalized step has been sent.")
+            messages.success(request, "Step 1 completed successfully.")
             return redirect('finalize_step2', offer_id=offer_id)
     else:
-        messages.error(request, "Please enter a valid finalize step.")
         form = FinalizeStep1Form(initial=session_data)
 
     return render(request, 'offers/finalize_step1.html', {
@@ -138,6 +137,10 @@ def finalize_step2(request, offer_id):
     '''Step 2 of the finalization process for a property sale.'''
     offer = get_object_or_404(Offer, pk=offer_id, user=request.user)
     session_data = request.session.get('finalize_data', {})
+
+    if not session_data.get('SSN'):
+        messages.error(request, "You must complete Step 1 first.")
+        return redirect('finalize_step1', offer_id=offer_id)
 
     if request.method == 'POST':
         form = FinalizeStep2Form(request.POST)
