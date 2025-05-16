@@ -49,3 +49,48 @@
 .finalize-container button:hover {
   background-color: #e4d9ac;
 }
+
+.step-indicator-wrapper {
+  margin-top: 50px;
+}
+
+.step-indicator {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding: 0;
+}
+
+.step-indicator li {
+  text-align: center;
+  color: #fff;
+}
+
+.step-indicator .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.step-indicator .label {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.step-indicator li.done .circle {
+  background: #6aa36f;
+}
+
+.step-indicator li.active .circle {
+  background: #3a593d;
+  border: 2px solid #fff;
+}
+

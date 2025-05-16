@@ -125,7 +125,8 @@ def finalize_step1(request, offer_id):
     return render(request, 'offers/finalize_step1.html', {
         'offer': offer,
         'countries': COUNTRIES,
-        'data': data
+        'data': data,
+        'step_number': 1
     })
 
 
@@ -154,7 +155,8 @@ def finalize_step2(request, offer_id):
 
     return render(request, 'offers/finalize_step2.html', {
         'offer': offer,
-        'data': finalize_data})
+        'data': finalize_data,
+        'step_number': 2})
 
 
 @login_required
@@ -165,7 +167,7 @@ def finalize_step3(request, offer_id):
     if request.method == 'POST':
         return redirect('finalize_step4', offer_id=offer_id)
 
-    return render(request, 'offers/finalize_step3.html', {'offer': offer, 'data': data})
+    return render(request, 'offers/finalize_step3.html', {'offer': offer, 'data': data, 'step_number': 3})
 
 
 @login_required
@@ -177,4 +179,4 @@ def finalize_step4(request, offer_id):
     offer.delete()
     property_obj.delete()
 
-    return render(request, 'offers/finalize_step4.html', {'data': data})
+    return render(request, 'offers/finalize_step4.html', {'data': data, 'step_number': 4})

@@ -4,6 +4,28 @@
 <link rel="stylesheet" href="{% static 'css/finalize_steps.css' %}">
 {% endblock %}
 {% block content %}
+<div class="step-indicator-wrapper">
+  <ul class="step-indicator">
+    <li class="{% if step_number == 1 %}active{% elif step_number > 1 %}done{% endif %}">
+      <div class="circle">1</div>
+      <div class="label">Contact</div>
+    </li>
+    <li class="{% if step_number == 2 %}active{% elif step_number > 2 %}done{% endif %}">
+      <div class="circle">2</div>
+      <div class="label">Payment</div>
+    </li>
+    <li class="{% if step_number == 3 %}active{% elif step_number > 3 %}done{% endif %}">
+      <div class="circle">3</div>
+      <div class="label">Review</div>
+    </li>
+    <li class="{% if step_number == 4 %}active{% endif %}">
+      <div class="circle">4</div>
+      <div class="label">Confirmation</div>
+    </li>
+  </ul>
+</div>
+
+
     <div class="finalize-container">
         <form method="post">
       {% csrf_token %}
@@ -24,13 +46,28 @@
 
       <!-- Bank Transfer Fields -->
       <div id="bank_transfer_fields" style="display: none;">
-        <input name="iban" value="{{ data.iban|default:'' }}" placeholder="IBAN" class="form-control mb-2">
-        <input name="swift" value="{{ data.swift|default:'' }}" placeholder="SWIFT/BIC" class="form-control mb-2">
+<div class="row mb-2 gx-2">
+  <div class="col-4">
+    <input name="bank_number" value="{{ data.bank_number|default:'' }}" placeholder="Bank" maxlength="4" class="form-control" pattern="\d{4}" required>
+  </div>
+  <div class="col-3">
+    <input name="branch_number" value="{{ data.branch_number|default:'' }}" placeholder="HB" maxlength="2" class="form-control" pattern="\d{2}" required>
+  </div>
+  <div class="col-5">
+    <input name="account_number" value="{{ data.account_number|default:'' }}" placeholder="Account" maxlength="6" class="form-control" pattern="\d{6}" required>
+  </div>
+</div>
       </div>
 
       <!-- Mortgage Fields -->
       <div id="mortgage_fields" style="display: none;">
-        <input name="provider" value="{{ data.provider|default:'' }}" placeholder="Mortgage Provider" class="form-control mb-2">
+        <select name="provider" class="form-control mb-2">
+          <option value="">-- Select Bank --</option>
+          <option value="Arion Banki" {% if data.provider == 'Arion Banki' %}selected{% endif %}>Arion Banki</option>
+          <option value="ÍslandsBanki" {% if data.provider == 'ÍslandsBanki' %}selected{% endif %}>ÍslandsBanki</option>
+          <option value="Landsbanki" {% if data.provider == 'Landsbanki' %}selected{% endif %}>Landsbanki</option>
+          <option value="Kvika" {% if data.provider == 'Kvika' %}selected{% endif %}>Kvika</option>
+        </select>
       </div>
 
       <div class="d-flex justify-content-between mt-4">
@@ -42,5 +79,5 @@
 
 
 
-    <script src="{% static 'app/finalize_offer2.js' %}"></script>
+    <script src="{% static 'scripts/finalize_offer2.js' %}"></script>
 {%  endblock %}
