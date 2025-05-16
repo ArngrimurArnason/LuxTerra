@@ -35,7 +35,6 @@
           {% if data.payment_method == 'credit_card' %}
             <li>Cardholder: {{ data.cardholder }}</li>
           {% elif data.payment_method == 'bank_transfer' %}
-            <li>IBAN: {{ data.iban }}</li>
           {% elif data.payment_method == 'mortgage' %}
             <li>Provider: {{ data.provider }}</li>
           {% endif %}
