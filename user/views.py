@@ -15,15 +15,17 @@ from django.utils import timezone
 
 # Create your views here.
 def account_info(request, user_id):
+    '''Displays account information and listed properties for a specific user'''
     user = get_object_or_404(User, user_id=user_id)
     properties = Property.objects.filter(user_id=user.user_id)
 
-    return render(request, 'account_info.html', {
+    return render(request, 'user/account_info.html', {
         'user': user,
         'properties': properties
     })
 
 def offer_history(request):
+    '''Displays the authenticated user's offer history'''
     Offer.objects.filter(user=request.user, offer_expiry_date__lt=timezone.now()).delete()
     user_offers = Offer.objects.select_related('property', 'user').filter(
         user=request.user,
@@ -35,6 +37,7 @@ def offer_history(request):
 
 
 def edit_profile(request):
+    '''Allows the authenticated user to edit their profile.'''
     user = request.user
 
     if request.method == 'POST':
@@ -51,14 +54,16 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=user)
 
-    return render(request, 'edit_profile.html', {'form': form})
+    return render(request, 'user/edit_profile.html', {'form': form})
 
 def incoming_offers(request):
+    '''Displays offers received for properties owned by the authenticated user'''
     offers = Offer.objects.select_related('property', 'user').filter(property__user=request.user)
     return render(request, 'offers/incoming_offers.html', {'offers': offers})
 
 
 def login_view(request):
+    '''Handles user login using email and password'''
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -80,9 +85,10 @@ def login_view(request):
         else:
             messages.error(request, 'Invalid email or password.')
 
-    return render(request, 'login.html')
+    return render(request, 'user/login.html')
 
 def signup_view(request):
+    '''Handles user signup using email and password'''
     if request.method == 'POST':
 
         form = SignUpForm(request.POST, request.FILES)
@@ -100,11 +106,12 @@ def signup_view(request):
             messages.error(request, 'Please fix errors below.')
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {
+    return render(request, 'user/signup.html', {
         'form': form})
 
 
 def get_profile_image(request, user_id):
+    '''Returns a JSON response with the URL of a user's profile image'''
     profile = get_object_or_404(User, user__id=user_id)
     return JsonResponse({
         'profile_image_url': profile.profile_image.url if profile.profile_image else None

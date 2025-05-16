@@ -12,6 +12,7 @@ from django.utils import timezone
 from offer.forms.offer_forms import OfferForm
 
 def group_postal_codes():
+    '''Groups Icelandic postal codes by city from LOCATION_CHOICES.'''
     grouped = defaultdict(list)
     for full_value, _ in LOCATION_CHOICES:
         if " - " in full_value:
@@ -20,6 +21,7 @@ def group_postal_codes():
     return dict(grouped)
 
 def properties_view(request):
+    '''Displays a list of approved properties with optional filters and sorting'''
     properties = Property.objects.filter(admin_approval=True)
 
     min_price = request.GET.get('min_price')
@@ -81,7 +83,7 @@ def properties_view(request):
         200000000, 250000000, 300000000, 350000000, 400000000
     ]
 
-    return render(request, 'all_properties.html', {
+    return render(request, 'properties/all_properties.html', {
         "properties": properties,
         "property_images": all_images,
         "filters": {
@@ -101,6 +103,7 @@ def properties_view(request):
 
 @login_required(login_url='login')
 def list_property(request):
+    '''Allows logged-in users to list a new property for sale'''
     if request.method == "POST":
         form = ListPropertyForm(request.POST, request.FILES)
         image_files = request.FILES.getlist('images')  # handle multi-images
@@ -117,18 +120,19 @@ def list_property(request):
             messages.success(request, 'Listing published to properties, you can view it under my profile.')
             # Don't redirect — just re-render the same page with an empty form
             form = ListPropertyForm()
-            return render(request, 'list_property.html', {'form': form})
+            return render(request, 'properties/list_property.html', {'form': form})
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
         form = ListPropertyForm()
 
-    return render(request, 'list_property.html', {'form': form})
+    return render(request, 'properties/list_property.html', {'form': form})
 
 
 
 
 def property_details(request, property_id):
+    '''Displays detailed information for a single property'''
     prop = get_object_or_404(Property, pk=property_id)
     images = prop.images.all()
 
@@ -149,7 +153,7 @@ def property_details(request, property_id):
         default_expiry = timezone.now().date() + timedelta(days=30)
         form = OfferForm(initial={'offer_expiry_date': default_expiry})
 
-    return render(request, 'property_details.html', {
+    return render(request, 'properties/property_details.html', {
         'property': prop,
         'images': images,
         'form': form,
